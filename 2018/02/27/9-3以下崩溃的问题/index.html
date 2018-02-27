@@ -180,20 +180,34 @@
 <li><p>解决方案：</p>
 <ol>
 <li>打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。</li>
-<li>右键name.app文件，点击显示包内容</li>
-<li>在终端中cd到name.app文件夹中</li>
-<li><p>用find命令定位到Assets.car文件</p>
-<figure class="highlight plain"><figcaption><span>find . -name 'Assets.car```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. 使用 assetutil 命令导出图片的信息存储到Assets.json文件中</span><br><span class="line"></span><br><span class="line"> ```$ sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json</span><br></pre></td></tr></table></figure>
-</li>
 </ol>
 </li>
 </ul>
 <ol>
+<li>右键name.app文件，点击显示包内容</li>
+</ol>
+<ol>
+<li>在终端中cd到name.app文件夹中</li>
+</ol>
+<ol>
+<li><p>用find命令定位到Assets.car文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">'Assets.car</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>使用 assetutil 命令导出图片的信息存储到Assets.json文件中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
 <li><p>打开生成的Assets.json文件 </p>
-<p><code>$ open /tmp/Assets.json</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ open /tmp/Assets.json</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>查找含有”DisplayGamut” : “P3”, “Encoding” : “ARGB-16″</p>
-</li>
+</ol>
+<ol>
+<li>查找含有”DisplayGamut” : “P3”, “Encoding” : “ARGB-16″</li>
+</ol>
+<ol>
 <li>Name字段即为有问题图片的名字，其替换掉重新打包上传，问题解决</li>
 </ol>
 
@@ -302,12 +316,12 @@
     
     
     
-    <div class="archive-year"> Invalid date </div>
+    <div class="archive-year"> 2018 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2017/11/29/hello-world/" >Hello World</a>
+            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018/02/27/9-3以下崩溃的问题/" >解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
         </li>
     
     
@@ -316,12 +330,12 @@
     
         </ul>
     
-    <div class="archive-year"> 2018 </div>
+    <div class="archive-year"> Invalid date </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018/02/27/9-3以下崩溃的问题/" >解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
+            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2017/11/29/hello-world/" >Hello World</a>
         </li>
     
     </div>
