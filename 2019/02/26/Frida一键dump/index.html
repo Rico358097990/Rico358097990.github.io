@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
     <title>
         
-        Hello World · Rico&#39;s blog
+        Rico&#39;s blog
         
     </title>
     <link rel="icon" href= /assests/favicon.ico>
@@ -63,7 +63,7 @@
                 <a href="/" >Rico&#39;s blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">Hello World</a>
+                <a href="#" class="post-name"></a>
             </div>
     </div>
     
@@ -84,7 +84,7 @@
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            Hello World
+            [Untitled Post]
             <!-- 404 -->
             
         </h1>
@@ -102,7 +102,7 @@
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/11/29</span>
+                <span class="post-intro-time">2019/02/26</span>
             </div>
         
     </div>
@@ -173,20 +173,53 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h1 id="Frida一键dump"><a href="#Frida一键dump" class="headerlink" title="Frida一键dump"></a>Frida一键dump</h1><h2 id="安装Frida"><a href="#安装Frida" class="headerlink" title="安装Frida"></a>安装Frida</h2><ul>
+<li><p>iOS端安装</p>
+<p>  打开cydia 添加源： <a href="https://build.frida.re/" target="_blank" rel="noopener">https://build.frida.re</a></p>
+<p>  打开刚刚添加的源 安装 frida（64位和32位，看自己手机类型）</p>
+</li>
+<li><p>Mac端安装</p>
+<p>  首先最好有brew &amp; python版本为2.x （Mac默认为2.x，可以用pyenv管理python版本）</p>
+<p>  终端执行：sudo pip install frida</p>
+<blockquote>
+<p>假如报以下错误：Uninstalling a distutils installed project (six) has been deprecated and will be removed in a future version. This is due to the fact that uninstalling a distutils project will only partially uninstall the project.<br>  使用以下命令安装：sudo pip install frida –upgrade –ignore-installed six<br>  假如报以下错误：Cannot uninstall ‘six’. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.<br>  使用以下命令安装：只需要把six注释掉不安装就可以了：sudo python -m pip install -U matplotlib –ignore-installed six</p>
+</blockquote>
+</li>
+<li><p>安装 frida-ios-dump</p>
+<ol>
+<li>sudo mkdir /opt/dump &amp;&amp; cd /opt/dump &amp;&amp; sudo git clone <a href="https://github.com/AloneMonkey/frida-ios-dump" target="_blank" rel="noopener">https://github.com/AloneMonkey/frida-ios-dump</a></li>
+<li><p>安装依赖</p>
+<p> sudo pip install -r /opt/dump/frida-ios-dump/requirements.txt –upgrade</p>
+</li>
+<li><p>修改dump.py（可选—-如果做了2222端口转发则不需要改）</p>
+<p> vim /opt/dump/frida-ios-dump/dump.py</p>
+<p> 修改.zshrc 添加alias </p>
+<p> alias dump.py=”/opt/dump/frida-ios-dump/dump.py”</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="一键dump"><a href="#一键dump" class="headerlink" title="一键dump"></a>一键dump</h2><p><a href="http://dump.py" target="_blank" rel="noopener">dump.py</a> -l 查看当前手机可脱壳应用</p>
+<p><a href="http://dump.py" target="_blank" rel="noopener">dump.py</a> 应用名称，会在当前目录输出脱壳文件</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-pager">
         
+            <li class="next">
+                <a href= "/2019/02/26/LLDB动态调试/" title=  >
+                    <span>Next Post</span>
+                    <span>[Untitled Post]</span>
+                </a>
+            </li>
+        
+        
+            <li class="previous">
+                <a href= "/2018/02/27/9-3以下崩溃的问题/" title= 解决release版本在iOS9.3以下崩溃的问题（P3图片） >
+                    <span>Previous Post</span>
+                    <span>解决release版本在iOS9.3以下崩溃的问题（P3图片）</span>
+                </a>
+            </li>
         
     </ul>
     <!-- 评论插件 -->
@@ -242,7 +275,7 @@
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Frida一键dump"><span class="toc-number">1.</span> <span class="toc-text">Frida一键dump</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Frida"><span class="toc-number">1.1.</span> <span class="toc-text">安装Frida</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一键dump"><span class="toc-number">1.2.</span> <span class="toc-text">一键dump</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top">&#xe639;</div>
@@ -267,19 +300,54 @@
     
     
     
-    <div class="total-archive"> Total : 1 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 3 </div>
     
     <div class="post-archive">
     
     
     
     
-    <div class="archive-year"> Invalid date </div>
+    <div class="archive-year"> 2019 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2017/11/29/hello-world/" >Hello World</a>
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018/02/27/9-3以下崩溃的问题/" >解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
         </li>
     
     </div>

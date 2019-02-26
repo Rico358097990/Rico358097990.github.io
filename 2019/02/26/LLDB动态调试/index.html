@@ -50,11 +50,22 @@
     
 </head>
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Rico&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name"></a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Rico's blog.</a>
 </header>
@@ -62,21 +73,37 @@
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(http://oumn0o088.bkt.clouddn.com/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            [Untitled Post]
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2019/02/26</span>
+            </div>
         
     </div>
 </div>
@@ -144,112 +171,78 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="LLDB动态调试"><a href="#LLDB动态调试" class="headerlink" title="LLDB动态调试"></a>LLDB动态调试</h1><h2 id="LLDB准备工作"><a href="#LLDB准备工作" class="headerlink" title="LLDB准备工作"></a>LLDB准备工作</h2><ol>
+<li><p>复制debugserver文件（这里必须从当前连接手机中复制，不然后面会出错）</p>
+<p> scp -P 2222 root@localhost:/Developer/usr/bin/debugserver ./</p>
+</li>
+<li><p>新建签名文件 env.plist</p>
+<pre><code>&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+        &lt;key&gt;com.apple.springboard.debugapplications&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;get-task-allow&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;task_for_pid-allow&lt;/key&gt;
+        &lt;true/&gt;
+        &lt;key&gt;run-unsigned-code&lt;/key&gt;
+        &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre></li>
+<li><p>使用codesign签名</p>
+<p> codesign -s - —entitlements env.plist -f debugserver</p>
+</li>
+<li><p>把debugserver放回手机，并给予权限</p>
+<p> scp -P 2222 ./debugserver root@localhost:/usr/bin/debugserver</p>
+</li>
+</ol>
+<h2 id="开始动态调试"><a href="#开始动态调试" class="headerlink" title="开始动态调试"></a>开始动态调试</h2><ol>
+<li>ps aux查看启动的进程</li>
+<li>debugserver *:1234 -a XXXX(名称或者进程ID)</li>
+<li>mac端终端输入lldb，</li>
+<li>然后输入process connect connect://&lt;手机IP&gt;:1234 (或者先iproxy 1234 1234转发端口 process connect connect://localhost:1234)</li>
+<li>按c继续 control + c暂停</li>
+<li><p>image list -o -f 查看程序在内存中的信息</p>
+<p> <img src="-af859891-8124-40c4-af43-fee55bee080auntitled" alt=""></p>
+<p> 第二列是内存中加载的基地址，第三列是模块全路径和模块真正加载的地址（起始地址+模块在虚拟地址中的内存偏移）</p>
+</li>
+<li><p>打断点 </p>
+<ul>
+<li>b + 内存地址（偏移后的）</li>
+<li>b  s -a 偏移地址 + 初始地址</li>
+</ul>
+</li>
+<li>po $x1…….</li>
+<li>其它LLDB命令有待实践</li>
+</ol>
+
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2019/02/26/Frida一键dump/" title=  >
+                    <span>Previous Post</span>
+                    <span>[Untitled Post]</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
     
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2019/02/26/LLDB动态调试/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>[Untitled Post]</span>
-                    </h2>
-                <div class="abstract-content">
-                    LLDB动态调试LLDB准备工作
-复制debugserver文件（这里必须从当前连接手机中复制，不然后面会出错）
- scp -P 2222 root@localhost:/Developer/usr/bin/debugserver ./
+    <!--PC版-->
 
-新建签名文件 env.plist
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quo...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/02/26</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2019/02/26/Frida一键dump/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>[Untitled Post]</span>
-                    </h2>
-                <div class="abstract-content">
-                    Frida一键dump安装Frida
-iOS端安装
-  打开cydia 添加源： https://build.frida.re
-  打开刚刚添加的源 安装 frida（64位和32位，看自己手机类型）
-
-Mac端安装
-  首先最好有brew &amp; python版本为2.x （Mac默认为2.x，可以用pyenv管理python版本）
-  终端执行：sudo pip install frida
-
-假如报以下错误：Uninstalling a distutils installed project (six) has been deprecated and will be remove...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/02/26</span>
-                </div>
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2018/02/27/9-3以下崩溃的问题/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>解决release版本在iOS9.3以下崩溃的问题（P3图片）</span>
-                    </h2>
-                <div class="abstract-content">
-                    解决release版本在iOS9.3以下崩溃的问题先描述下一下问题：所有release版本的包（包括App Store和adHoc）在iOS9.3以下手机运行，点击任意地方崩溃，无法定位。联机调试是没有问题的。
-
-问题原因：图片资源文件里有16位图或者图片显示模式为P3
-
-解决方案：
+    <!--PC版-->
 
 
-
-打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。
-
-
-右键name.app文件，点击显示包内容
-
-
-在终端中cd到name.app文件夹中
-
-
-用find命令定位到Assets.car文件
-1$ find . -name 'Assets.car
-
-
-
-使用 assetut...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/27</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
     
 </main>
             <!-- profile -->
@@ -287,6 +280,13 @@ Mac端安装
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LLDB动态调试"><span class="toc-number">1.</span> <span class="toc-text">LLDB动态调试</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LLDB准备工作"><span class="toc-number">1.1.</span> <span class="toc-text">LLDB准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#开始动态调试"><span class="toc-number">1.2.</span> <span class="toc-text">开始动态调试</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">

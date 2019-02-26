@@ -149,17 +149,19 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2017/11/29/hello-world/" >
+            <a class="content-show-full" href = "/2019/02/26/LLDB动态调试/" >
                     <h2 class="abstract-title">
                         
-                        <span>Hello World</span>
+                        <span>[Untitled Post]</span>
                     </h2>
                 <div class="abstract-content">
-                    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
-More info: Writing
-Run server1$ hexo server
-More...
+                    LLDB动态调试LLDB准备工作
+复制debugserver文件（这里必须从当前连接手机中复制，不然后面会出错）
+ scp -P 2222 root@localhost:/Developer/usr/bin/debugserver ./
+
+新建签名文件 env.plist
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quo...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -167,7 +169,38 @@ More...
                 
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/11/29</span>
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/02/26</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2019/02/26/Frida一键dump/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>[Untitled Post]</span>
+                    </h2>
+                <div class="abstract-content">
+                    Frida一键dump安装Frida
+iOS端安装
+  打开cydia 添加源： https://build.frida.re
+  打开刚刚添加的源 安装 frida（64位和32位，看自己手机类型）
+
+Mac端安装
+  首先最好有brew &amp; python版本为2.x （Mac默认为2.x，可以用pyenv管理python版本）
+  终端执行：sudo pip install frida
+
+假如报以下错误：Uninstalling a distutils installed project (six) has been deprecated and will be remove...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/02/26</span>
                 </div>
             </div>
         </article>
@@ -233,19 +266,54 @@ More...
     
     
     
-    <div class="total-archive"> Total : 1 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 3 </div>
     
     <div class="post-archive">
     
     
     
     
-    <div class="archive-year"> Invalid date </div>
+    <div class="archive-year"> 2019 </div>
     <ul class="year-list">
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">Invalid date</span><a class="archive-post-title" href= "/2017/11/29/hello-world/" >Hello World</a>
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >[Untitled Post]</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018/02/27/9-3以下崩溃的问题/" >解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
         </li>
     
     </div>
