@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="Rico">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="Rico">
+    
+    <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>审核 · Rico&#39;s blog</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+</head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Rico&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">审核</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Rico's blog.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            审核
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">6.8k</span>阅读时长: <span class="post-count reading-time">24 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/08/16</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="审核"><a href="#审核" class="headerlink" title="审核"></a>审核</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h1><p>如今苹果审核越来越严格，各个项目组都存在各种不同的审核问题：大到产品下架、封号影响业绩，小到延迟审核耽误项目进程。针对最近频繁出现的部分审核问题，做出归纳与总结，并且根据经验给与相应的解决措施，希望今后形成公司层面上的应对苹果审核的规范。</p>
+<h1 id="审核条款与更新"><a href="#审核条款与更新" class="headerlink" title="审核条款与更新"></a><strong>审核条款与更新</strong></h1><p>重要网址：</p>
+<ol>
+<li><p>审核指南（最新最齐全的官方审核指南）</p>
+<p> <a href="https://developer.apple.com/cn/app-store/review/guidelines/" target="_blank" rel="noopener">https://developer.apple.com/cn/app-store/review/guidelines/</a></p>
+<p> 目前更新到：2018 年 12 月 19 日</p>
+</li>
+<li><p>审核指导（官方提供有助审核的指导意见）</p>
+<p> <a href="https://developer.apple.com/cn/app-store/review/" target="_blank" rel="noopener">https://developer.apple.com/cn/app-store/review/</a></p>
+</li>
+<li><p>App Store Connect 帮助</p>
+<p> <a href="https://help.apple.com/app-store-connect/?lang=zh-cn#/devaf41ecbd5" target="_blank" rel="noopener">https://help.apple.com/app-store-connect/?lang=zh-cn#/devaf41ecbd5</a></p>
+</li>
+<li><p>申诉、加急、查询审核状态、补充信息网址（英）</p>
+<p> <a href="https://developer.apple.com/contact/app-store/?topic=appeal" target="_blank" rel="noopener">https://developer.apple.com/contact/app-store/?topic=appeal</a></p>
+</li>
+<li><p>苹果联系方式</p>
+<p> <a href="https://developer.apple.com//contact/#!/topic/select" target="_blank" rel="noopener">https://developer.apple.com//contact/#!/topic/select</a></p>
+</li>
+<li><p>苹果人机界面交互指南（强烈建议产品经理都好好看看）（英）</p>
+<p> <a href="https://developer.apple.com/design/human-interface-guidelines/" target="_blank" rel="noopener">https://developer.apple.com/design/human-interface-guidelines/</a></p>
+</li>
+</ol>
+<h1 id="经常遇到的审核难题和解决措施"><a href="#经常遇到的审核难题和解决措施" class="headerlink" title="经常遇到的审核难题和解决措施"></a><strong>经常遇到的审核难题和解决措施</strong></h1><h3 id="一-重复-垃圾-应用（违反4-3原则）"><a href="#一-重复-垃圾-应用（违反4-3原则）" class="headerlink" title="一. 重复/垃圾 应用（违反4.3原则）"></a><strong>一. 重复/垃圾 应用（违反4.3原则）</strong></h3><p>请不要为==同一个 app 创建多个套装 ID==。如果您的 app 针对特定位置、运动队、大学等存在不同版本，请考虑提交单个 app，并提供 App 内购买项目以提供不同的功能。同时，==请避免继续在已有大量类似 app 的类别下进行开发==；App Store 上已经有太多模拟放屁、打嗝声音的 app，以及手电筒和爱经 app。==上传大量相似版本 app 的开发者会遭到 Apple Developer Program 的除名==。</p>
+<p>指南中的两点核心内容：</p>
+<h3 id="1-不要为同一个APP创建多个应用，也就是我们曾经做过的马甲包。表现形式为：代码雷同、UI雷同、引用名称类似、应用分类相同，被发现的结果是应用下架、封禁账号。"><a href="#1-不要为同一个APP创建多个应用，也就是我们曾经做过的马甲包。表现形式为：代码雷同、UI雷同、引用名称类似、应用分类相同，被发现的结果是应用下架、封禁账号。" class="headerlink" title="1.不要为同一个APP创建多个应用，也就是我们曾经做过的马甲包。表现形式为：代码雷同、UI雷同、引用名称类似、应用分类相同，被发现的结果是应用下架、封禁账号。"></a><strong>1.不要为同一个APP创建多个应用，也就是我们曾经做过的马甲包。表现形式为：代码雷同、UI雷同、引用名称类似、应用分类相同，被发现的结果是应用下架、封禁账号。</strong></h3><h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a><strong>解决方法</strong></h3><ul>
+<li>代码相关：混淆代码，更改类名、方法名、文件名、项目名、加入垃圾代码（最好手动改，其次加入可调用的自动生成的垃圾代码）等。</li>
+<li>资料相关：切断当前马甲包与以往马甲包的所有相似性关联。相似性关联除了上面的代码以外还包括：<ol>
+<li>开发者帐号（申请账号的手机、银行卡也要注意）</li>
+<li>打包电脑（弄个外接硬盘也行）</li>
+<li>上传IP（开VPN/移动、联通、电信4G、异地传包）</li>
+<li>材料相似(标题、隐私协议地址用个人博客、关键词、应用描述、截图、审核账号、电话号码、联系人名字)</li>
+<li>异地传包的方式亲测很有效。</li>
+</ol>
+</li>
+<li>借壳上架。<ol>
+<li>利用其他应用作为壳子提新包</li>
+<li>在已有的线上包上面进行融合后更新。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-请避免继续在已有大量类似-app-的类别下进行开发。触犯这点主要是因为我们公司之前一直都处于追热度、微创新阶段，但如果该类型APP已经烂大街了，即使看起来收益不错，我建议在立项阶段要三思。"><a href="#2-请避免继续在已有大量类似-app-的类别下进行开发。触犯这点主要是因为我们公司之前一直都处于追热度、微创新阶段，但如果该类型APP已经烂大街了，即使看起来收益不错，我建议在立项阶段要三思。" class="headerlink" title="2.请避免继续在已有大量类似 app 的类别下进行开发。触犯这点主要是因为我们公司之前一直都处于追热度、微创新阶段，但如果该类型APP已经烂大街了，即使看起来收益不错，我建议在立项阶段要三思。"></a><strong>2.请避免继续在已有大量类似 app 的类别下进行开发。触犯这点主要是因为我们公司之前一直都处于追热度、微创新阶段，但如果该类型APP已经烂大街了，即使看起来收益不错，我建议在立项阶段要三思。</strong></h3><h3 id="解决方法-1"><a href="#解决方法-1" class="headerlink" title="解决方法"></a><strong>解决方法</strong></h3><p>如果已经确定因为这一点违反审核原则，在代码层面基本上没有什么问题。接下来需要做的有几点供参考：</p>
+<ul>
+<li>考察市面上现存的相似软件，从UI、截图、销售区域这三个角度去寻求差异化。</li>
+<li>换软件主要语言。如果是国内产品存在大量同质化APP，就在第一个版本用英文版，在海外账号上面进行提交。</li>
+<li><p>换切入点，从小众APP入手。以换肤、功能附加的方式，通过几个版本的演变慢慢达到想要的效果。</p>
+<p>  如：古风语记-即时语音转文字 -&gt; 古风录音-语音备忘录音转文字软件 -&gt; 专业录音-古风语音备忘录音软件 -&gt;专业录音-最美语音备忘录音软件 等等。。。。</p>
+</li>
+</ul>
+<h3 id="二-大礼包（2-1狗年大礼包）"><a href="#二-大礼包（2-1狗年大礼包）" class="headerlink" title="二. 大礼包（2.1狗年大礼包）"></a><strong>二. 大礼包（2.1狗年大礼包）</strong></h3><p>目前最新的拒绝邮件里包含了9个条款内容</p>
+<p>不需要提交新的二进制文件，只需要回复信息确认即可，如果苹果收到回复后，觉得确实有问题，会直接封号处理。</p>
+<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a><strong>解决方案：</strong></h3><ol>
+<li>先在回复中心直接回复相关信息，一条一条的回复，最好用英文回复。详情请参阅 <a href="http://note.youdao.com/noteshare?id=62dcec6b6362d66c2f6de12d1b4245e3" target="_blank" rel="noopener">苹果拒绝邮件内容和回复模板</a></li>
+<li>等待苹果的回复。切记不需要重新提交，只需要回复邮件即可。接下来苹果那边会自动将APP进入审核，如果没问题，顺利通过。如果有问题打回的话，多半会封号。这个时候如果觉得冤枉，可以继续提交上诉，要么就放弃。</li>
+</ol>
+<h3 id="三-隐藏功能（2-3-1）"><a href="#三-隐藏功能（2-3-1）" class="headerlink" title="三. 隐藏功能（2.3.1）"></a><strong>三. 隐藏功能（2.3.1）</strong></h3><blockquote>
+<p>2.3.1 请勿在 app 中包含未记录的功能或隐藏功能；不管是对于最终用户还是 App Review 团队，app 功能都应清晰可见。同样，您不应该在 App Store 或离线情况下，营销您的 app 中实际并不提供的内容或服务 (例如基于 iOS 的病毒和恶意软件扫描工具)。如果出现恶劣或屡教不改的行为，则可能会从 Apple Developer Program 中除名。我们正努力将 App Store 打造成值得信赖的生态系统，并希望我们的 app 开发者也能如此；如果您不诚实以待，我们之间就不会有任何业务往来。</p>
+</blockquote>
+<p>一般的结果是拒绝并且延迟审核，时间在14-40天不等。</p>
+<h3 id="解决方案：-1"><a href="#解决方案：-1" class="headerlink" title="解决方案："></a><strong>解决方案：</strong></h3><ol>
+<li>如果没有隐藏功能，就回复邮件，阐述清楚。</li>
+<li>如果确实有隐藏功能。就去干净，并且回复邮件保证再也不这么做了。去干净了基本上就能通过，只是看具体需要多久。</li>
+<li>在如今苹果管制严格的情况下，这个问题如果重复犯，轻则包废，重则标记封号。</li>
+</ol>
+<h3 id="四-最小功能（4-2-minimum-functionality）"><a href="#四-最小功能（4-2-minimum-functionality）" class="headerlink" title="四. 最小功能（4.2 minimum-functionality）"></a><strong>四. 最小功能（4.2 minimum-functionality）</strong></h3><p>主要问题在于苹果认为部分开发者上传的App功能不够，或者没有自己的核心功能。</p>
+<p>两种情况，一种是APP过于简单，不适合应用市场，适合做个Web应用，另一种是审核人员不会玩你的应用。这两种情况我们都有遇到过。</p>
+<ol>
+<li>如果因为第一种原因，就想办法给应用填充内容，原来单一页面，可以扩充为几个Tab，或者揉进去其他的功能点，切记不要用那些烂大街的代码，很容易4.3</li>
+<li>第二种原因也很好解决，恢复邮件，附上操作视频链接，最好是上传到youtobe上面。回复模板参照<a href="https://www.showdoc.cc/wangshaohui?page_id=1546160385483145" target="_blank" rel="noopener">最小功能回复模板</a></li>
+<li>注意，苹果审核都是使用iPad进行测试，即使应用没有兼容iPad也建议使用iPad进行测试，注意界面和按钮的遮挡，会影响到审核人员体验到你的部分功能，导致误判。</li>
+</ol>
+<h3 id="五-14天内封号问题（other）"><a href="#五-14天内封号问题（other）" class="headerlink" title="五. 14天内封号问题（other）"></a><strong>五. 14天内封号问题（other）</strong></h3><p>最严重的事情莫过于某天突然收到一封苹果的邮件，标题写着Other。内容大概是我们发现您违反了苹果开发者协议，14天之内如果没有上诉就封号处理。</p>
+<h3 id="解决方式："><a href="#解决方式：" class="headerlink" title="解决方式："></a><strong>解决方式：</strong></h3><p>首先分清楚具体的下架原因，往往苹果不会非常明确指出触犯具体哪一条，但是会在回复邮件中着重指出相关条例，具体哪里违规需要综合评估。</p>
+<p>先看邮件内容：</p>
+<blockquote>
+<p>Hello,If you would like to appeal this rejection to the App Review Board, you must do so within 14 calendar days. Otherwise, your Apple Developer Program account and all apps associated with your account will be removed.Your Apple Developer Program account has been flagged for removal, because your app is in direct violation of the Apple Developer Program License Agreement, which states:“You will not, directly or indirectly, commit any act intended to interfere with the Apple Software or related services, the intent of this Agreement, or Apple’s business practices including, but not limited to, taking actions that may hinder the performance or intended use of the App Store, VPP/B2B Program Site, or the Program (e.g., submitting fraudulent reviews of Your own Application or any third party application, choosing a name for Your Application that is substantially similar to the name of a third party application in order to create consumer confusion, or squatting on application names to prevent legitimate third party use).”Best regards,App Store Review中文：你好,如果你想向App Review Board申诉这个拒绝，你必须在14个日历天内完成。否则，您的Apple Developer Program帐户和所有与您的帐户相关的应用程序将被删除。您的Apple Developer Program帐号已被标记移除，因为您的应用程序直接违反了Apple Developer Program许可协议，该协议规定:“你不会,直接或间接犯下任何法案旨在干扰苹果软件或相关服务,本协议的意图,或苹果的商业行为,包括但不限于,采取行动,可能会阻碍性能或用途的应用程序商店,VPP / B2B项目网站或程序(例如,==提交虚假评论自己的应用程序或任何第三方应用程序,为您的应用程序选择一个与第三方应用程序的名称本质上类似的名称，以造成用户的混淆，或者占用应用程序名称，以防止合法的第三方使用==)。最诚挚的问候,应用商店评论</p>
+</blockquote>
+<p>括号里面的内容格外重要。很多应用会收到类似的邮件，可以说是模板，这个时候就要仔细思考一下具体的原因了。</p>
+<ol>
+<li>刷评论</li>
+<li>占用其他应用的名称或关键词</li>
+<li>多次中4.3，重复应用</li>
+<li>两次以上被发现隐藏功能或其他欺诈手段</li>
+</ol>
+<p><a href="http://note.youdao.com/noteshare?id=b8e99530e13ea142cb5123729aa61c51" target="_blank" rel="noopener">点击查看更多苹果封号邮件</a></p>
+<p>在苹果的回复邮件中可以明显看到三次不同的邮件，每次提供的信息会更清晰一些。也就是说一旦收到类似邮件，你首先确认自己的APP到底有没有相关违规操作，如果有，多半可以放弃了。因为这是苹果最严厉的惩罚措施了。如果没有问题，请申诉到底。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a><strong>解决办法</strong></h3><ol>
+<li>首次收到此类邮件时，不要着急，没下架就说明当前版本是没问题的，只是这次提交更新有问题，首先立即回复邮件，看有没有回复，5天内没有回复，直接提起上诉:<a href="https://developer.apple.com/contact/app-store/?topic=appeal" target="_blank" rel="noopener">上诉链接</a>.</li>
+<li>如果确实不行，那就放心大胆的转移到其他账号上面，不用尝试再次更新了，因为这个包已经被标记，无法正常更新了，否则会继续封号。</li>
+<li>接到邮件的时候一定要分析具体原因，从进入审核的时间、被拒的时间来分析。比如：小精灵进入审核1秒被拒，说明在审查资料的阶段就没有通过，根本没有进入人审。从应用描述、标题、是否刷评论上面寻找原因。</li>
+<li>这种问题没有彻底的解决办法，只有申诉的过程中根据具体情况来应对。如果不是大型app 做好放弃的准备（万年历几个月了还没恢复）。</li>
+</ol>
+<h3 id="六-其他需要注意的小问题"><a href="#六-其他需要注意的小问题" class="headerlink" title="六. 其他需要注意的小问题"></a><strong>六. 其他需要注意的小问题</strong></h3><h3 id="1-App-完成度（2-1-）"><a href="#1-App-完成度（2-1-）" class="headerlink" title="1. App 完成度（2.1 ）"></a><strong>1. App 完成度（2.1 ）</strong></h3><p>主要有应用出现崩溃、加载失败等非常明显的Bug、应用不支持 IPv6网络下使用、测试账号、隐藏开关等。如：录音开启了后台播放却没有页面显示。</p>
+<h3 id="2-截图与应用内容不符（2-3-准确的元数据）"><a href="#2-截图与应用内容不符（2-3-准确的元数据）" class="headerlink" title="2. 截图与应用内容不符（2.3 准确的元数据）"></a><strong>2. 截图与应用内容不符（2.3 准确的元数据）</strong></h3><p>截图太过艺术化，完全不符合应用的实际内容，或选择的分类和应用性质完全不符等等都有可能被拒。</p>
+<p>这个问题除了查看自己应用截图的尺寸、内容之外，切记iPad的截图一定不要用iPhone的截图去拉伸出来，会直接被拒绝。</p>
+<h3 id="3-应用出现崩溃、加载失败等非常明显的Bug"><a href="#3-应用出现崩溃、加载失败等非常明显的Bug" class="headerlink" title="3. 应用出现崩溃、加载失败等非常明显的Bug"></a><strong>3. 应用出现崩溃、加载失败等非常明显的Bug</strong></h3><p>比如服务器在审核的时候出现连接不上的情况。请确保你的应用在提交审核之前经过充分测试并且没有Bug……不要把应用程序审核当作软件测试服务，如果你的应用不完整或者存在明显的技术缺陷，它将直接被拒绝。</p>
+<h3 id="4-错误使用抽奖、竞猜等促销方式"><a href="#4-错误使用抽奖、竞猜等促销方式" class="headerlink" title="4. 错误使用抽奖、竞猜等促销方式"></a><strong>4. 错误使用抽奖、竞猜等促销方式</strong></h3><p>抽奖、彩票、竞猜等功能可能是应用使用最普遍的促销方式之一了，而苹果对这些也做出了规定。例如：</p>
+<ol>
+<li>用于抽奖和竞猜的官方规则必须在应用当中予以提供，并且明确表明苹果公司不是赞助商或者以任何形式参与了该活动，我们公司经常集成的互动广告，没有写上面的字样，很可能会被拒绝。</li>
+<li>应用不允许使用应用内付费购买信用点或者虚拟货币，并把它们与实际的货币结合使用，也不允许在应用当中购买彩票、抽奖券，和进行资金转移。</li>
+<li>抽奖相关的如果没有并且明确表明苹果公司不是赞助商或者以任何形式参与了该活动；</li>
+</ol>
+<h3 id="5-侵犯第三方版权"><a href="#5-侵犯第三方版权" class="headerlink" title="5. 侵犯第三方版权"></a><strong>5. 侵犯第三方版权</strong></h3><p>苹果对知识产权的保护力度是有目共睹的——不仅在审核条款中单独设了【5.2知识产权】这一条，还开通了投诉通道。App Store审核条款里明确规定：</p>
+<ol>
+<li>不要使用受保护的第三方内容，如商标、版权作品，或者在应用中使用未经专利许可的创意。</li>
+<li>如果你的应用使用、访问、展示和商业化第三方的服务，请保证你已经获得了相应的授权许可，且必须根据要求在审核前一并提供许可文件。</li>
+<li>应用程序不能对非法分享、保存、转换或者来自第三方源的数据的非法使用提供方便，除非具有相应的合法授权协议。</li>
+</ol>
+<p>除此之外，苹果也出台了一系列保护自身知识产权的条款，例如：</p>
+<ol>
+<li>不要明示或暗示苹果公司是你的应用的供应商，或者苹果为你的应用的功能和质量代言。</li>
+<li>禁止创建一个与苹果已有产品、用户界面、应用、广告主题相似的应用，且不允许拼错苹果产品名称。</li>
+</ol>
+<h3 id="6-含UGC却未提供用户协议及举报功能"><a href="#6-含UGC却未提供用户协议及举报功能" class="headerlink" title="6.含UGC却未提供用户协议及举报功能"></a><strong>6.含UGC却未提供用户协议及举报功能</strong></h3><p>如果应用内有发帖等UGC（用户产生内容）功能，但是却没有要求用户同意条款（EULA），也没有对敏感信息的举报措施等，也可能被拒。</p>
+<h3 id="7-可接受的商业模式（3-2-1-）"><a href="#7-可接受的商业模式（3-2-1-）" class="headerlink" title="7.可接受的商业模式（3.2.1 ）"></a><strong>7.可接受的商业模式（3.2.1 ）</strong></h3><p>主要是没有资质。解决方法：最佳方案是拿到资质，如果实在没有资质，建议大家尽可能多的把自己公司合规的证据资料发给苹果，而套壳、换新账号碰运气上架等操作，不得已的话可以尝试。</p>
+<h3 id="8-定位服务-5-1-5"><a href="#8-定位服务-5-1-5" class="headerlink" title="8. 定位服务 5.1.5"></a><strong>8. 定位服务 5.1.5</strong></h3><p>主要是 App 未得到允许，与第三方共享收集的用户数据，且并未说明使用目的等，例：位置、账号、相机权限等</p>
+<p>解决方法：如果要采取用户数据信息，需要给予用户提示，并得到用户的允许，或设置为可选，并且明确告知苹果采集用户数据信息的使用目的（在提示中详细指出，而不是简单地说：需要开启某某权限）。</p>
+<h3 id="9-禁止强制更新-强制好评"><a href="#9-禁止强制更新-强制好评" class="headerlink" title="9. 禁止强制更新/强制好评"></a><strong>9. 禁止强制更新/强制好评</strong></h3><p>轻则被拒，重则下架。</p>
+<p>解决方法：去掉发现新版本、立即更新等按钮，去掉强制好评弹框，这里强制好评指的是好评解锁功能、好评赠送会员等。可以使用静态显示 给个评价 来让用户自己触发。主动弹窗不诱导这种方式待测试。</p>
+<h3 id="10-私有API-被扫到-（2-5-1）"><a href="#10-私有API-被扫到-（2-5-1）" class="headerlink" title="10. 私有API 被扫到 （2.5.1）"></a><strong>10. 私有API 被扫到 （2.5.1）</strong></h3><p>出现</p>
+<blockquote>
+<p>Your app uses the “prefs:root=” non-public URL scheme, which is a private entity. The use of non-public APIs is not permitted on the App Store because it can lead to a poor user experience should these APIs change.</p>
+</blockquote>
+<p>这样的回复拒绝邮件，一定要仔细检查代码中的：”prefs:root=”，全部删掉，包括注释。一定会被查出来的。</p>
+<h3 id="11-强制登录购买-（5-1-1）"><a href="#11-强制登录购买-（5-1-1）" class="headerlink" title="11. 强制登录购买 （5.1.1）"></a><strong>11. 强制登录购买 （5.1.1）</strong></h3><p>We noticed that your app requires users to register with personal information to purchase non account-based in-app purchase products, which does not comply with the App Store Review Guidelines.</p>
+<p>制作一套游客模式下的操作流程,增加游客功能。尤其是在购买的时候，不要强制用户登录购买，一定加上游客登录，仿照大厂。</p>
+<h3 id="12-APP处于测试模式（2-2）"><a href="#12-APP处于测试模式（2-2）" class="headerlink" title="12. APP处于测试模式（2.2）"></a><strong>12. APP处于测试模式（2.2）</strong></h3><blockquote>
+<p>Guideline 2.2 - Performance - Beta Testing</p>
+</blockquote>
+<p>删除所有的“demo”，“试用”，“beta”，或者“测试”在你的应用程序描述，应用程序图标，屏幕截图，预览，发布说明，和二进制文件中，同时不要预留功能，就是有按钮，点击了没用那种情况。</p>
+<h3 id="13-未添加恢复购买按钮（3-1-1）"><a href="#13-未添加恢复购买按钮（3-1-1）" class="headerlink" title="13. 未添加恢复购买按钮（3.1.1）"></a><strong>13. 未添加恢复购买按钮（3.1.1）</strong></h3><p>苹果要求我们对于非消耗品的商品，提供恢复购买的机制，如果不提供，那么将会被拒。</p>
+<p>解决方式：</p>
+<p>对于，一次性购买和连续订阅类型的产品，我们需要提供一个恢复购买的按钮，以恢复用户的产品，比如会员时长等。</p>
+<h3 id="14-使用后台服务（2-5-4）"><a href="#14-使用后台服务（2-5-4）" class="headerlink" title="14. 使用后台服务（2.5.4）"></a><strong>14. 使用后台服务（2.5.4）</strong></h3><p>出现这个问题的原因是我们配置了“Background Modes”这个属性，然后程序退出后台后，我们没有给出展示，比如音乐播放，没调用系统的后台播放器，导致审核人员没看到有后台运行，所以被拒。</p>
+<p>解决方式：</p>
+<p>为程序提供开启锁屏界面和监控远程控制事件，MPRemoteCommandCenter官方文档：</p>
+<p><a href="https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter" target="_blank" rel="noopener">https://developer.apple.com/documentation/mediaplayer/mpremotecommandcenter</a></p>
+<h1 id="审核过程中需要清楚的地方"><a href="#审核过程中需要清楚的地方" class="headerlink" title="审核过程中需要清楚的地方"></a><strong>审核过程中需要清楚的地方</strong></h1><h3 id="1-审核流程"><a href="#1-审核流程" class="headerlink" title="1. 审核流程"></a><strong>1. 审核流程</strong></h3><p>苹果审核大体分为三部分，预审、机审和人工审核。目前应用提审的整个流程大体分为五个阶段：Prepare For Upload（准备上传）、Waiting For Review（等待审核）、 In Review（审核）、Pending Developer Release(等待开发者发布)、Ready For Sale（准备销售）。</p>
+<p>APP上传后，会进入到 Wait for Review 状态，而后进入到In Review状态，In Review一般最快一个小时内，正常24小时内就会审核通过或者是被打回。</p>
+<p>包上传后首先进入的是预审，会被扫描API等，预审通过后会在iTC里出现，然后才可以提交至 Waiting；</p>
+<p>在 Waiting For Review（等待审核）阶段一般是机审，机审主要是对代码进行机器审核，排查APP是否重复应用，“2.1苹果狗年大礼包”事件就更多地依赖机器自动审核，减少人工成本；</p>
+<p>通过后会进入In Review（审核）阶段，即人工审核阶段，这个阶段主要看的是App的元数据，例如APP封面、功能、体验等等，注重用户体验。</p>
+<ol>
+<li>工作日（周一到周五）等待审核超过2天以上，就需要查看自己的账号、应用代码、资料填写是否有问题了。这个时候很可能因为APP的二进制文件、账号等问题被列入严查范围了。当然首次提包的时间会稍微长一些，但是不超过3、4天，你就可以把应用先撤下了。因为肯定有问题，需要想其他办法了。</li>
+<li>in review的时间超过1天，应用肯定有问题，项目组可以一边等一边开始准备其他方案了。这个阶段谨慎撤包，除非排查确实没问题可以撤掉。</li>
+<li>其实在进入审核之前，提包之后，都是预审阶段，相当于已经在app store的审核过程中了。这个时候无论哪个地方有问题，都极大可能面临卡审。（账号问题的嫌疑最大，其次是二进制文件）</li>
+</ol>
+<h3 id="2-审核被拒后的回复"><a href="#2-审核被拒后的回复" class="headerlink" title="2. 审核被拒后的回复"></a><strong>2. 审核被拒后的回复</strong></h3><ol>
+<li>在被拒绝下方有一个回复框，你在这里可以向苹果解释误会以及一些操作步骤。使用中文就可以。但是要注意，不要使用上方的向App审查委员会提交上诉</li>
+<li>苹果审核有两个部门，一个是review team， 他们拒绝你以后会在Resolution Center 中给你拒绝邮件。另外一个是App Review Board。App Review Board就是审核委员会，他们的级别高于review team。当你对review team给出的原因和解决方案不满意的话，可以向更高一级的App Review Board提出上诉。<strong>（其实，可以非常明确的是：审核委员会其实就是审核小组里面的几个优秀的人组成的）</strong></li>
+</ol>
+<p>但是请注意如果你已经回复过了Resolution Center（也就是下方的输入框哪里）而他们还没有给你回应时候，不要再点击上方的向“App审查委员会提交上诉”否则就会收到下面的邮件：</p>
+<blockquote>
+<p>Hello xxx,Thank you for contacting the App Review Board.We see that you’re currently communicating with the App Store Review team through the Resolution Center, so we’re closing your appeal. If you would like to continue the appeal process, please reply to this message to let us know.Best regards.App Store Review Board</p>
+</blockquote>
+<p>意思是你已经在问题中心回复过了，等待消息就好，如果还想继续上诉，就回复这个邮件。</p>
+<h3 id="3-善用电话支持"><a href="#3-善用电话支持" class="headerlink" title="3. 善用电话支持"></a><strong>3. 善用电话支持</strong></h3><p>在你被拒绝很多次的时候，很容易面临着延迟审核，至少14天以上。</p>
+<p>那么你在前两次被拒绝的时候，反复查看自己的应用仍然觉得冤枉或者不知道哪里的问题的时候，最好的方式是申请电话协助，电话那边是华人，他会很清楚的告诉你应用的问题。你再根据他的回答进行修改应用即可。</p>
+<p>一般苹果同意电话援助之后，在第二条或者第三天的上午10点半左右来电话。</p>
+<h1 id="测试部需要特别注意的地方"><a href="#测试部需要特别注意的地方" class="headerlink" title="测试部需要特别注意的地方"></a><strong>测试部需要特别注意的地方</strong></h1><h3 id="性能："><a href="#性能：" class="headerlink" title="性能："></a><strong>性能：</strong></h3><ol>
+<li>即使应用不支持iPad，也最好使用iPad看一下应用有没有什么重大的闪退bug、界面显示不全影响核心功能的地方。</li>
+</ol>
+<h3 id="支付："><a href="#支付：" class="headerlink" title="支付："></a><strong>支付：</strong></h3><ol>
+<li>支付方式：软件服务类应用，只允许苹果内购，人工服务、电商类APP可以使用微信、支付宝支付。</li>
+<li>应用程序中遇到的支付方式不是Apple Pay而是内购IAP。不要出现苹果支付的字样。</li>
+<li>内购一定要经过测试账号跑通。另外一定要有 恢复购买 功能。</li>
+<li>格外注意在支付的过程中如果点击支付后等待时间过长也会被拒绝。需要严格测试一下，如果发现时间过长，可以让程序员看看是服务器问题还是前端代码问题。确实是苹果服务器的问题就可以先不管。</li>
+</ol>
+<h3 id="APP-Store后台"><a href="#APP-Store后台" class="headerlink" title="APP Store后台"></a><strong>APP Store后台</strong></h3><p>App Store后台截图如果有必要最好也可以配合发包的程序员检查一下。</p>
+<ol>
+<li>应用截图。iPad、iPhone X、Plus,三种不要搞混，准确反映应用内容即可。</li>
+<li>测试账号 如果需要登陆的应用 测试账号必须有，并且必须能再审核的时候登录成功。（别手贱删除了之前的测试账号，苹果会复审的）在审核备注那里。</li>
+</ol>
+<h1 id="商务部门曾经的一些提问"><a href="#商务部门曾经的一些提问" class="headerlink" title="商务部门曾经的一些提问"></a><strong>商务部门曾经的一些提问</strong></h1><h3 id="1-修改关键词、描述需要提新包吗？"><a href="#1-修改关键词、描述需要提新包吗？" class="headerlink" title="1. 修改关键词、描述需要提新包吗？"></a><strong>1. 修改关键词、描述需要提新包吗？</strong></h3><p>2018年下半年开始，应用描述、标题、关键词的修改必须重新发版提交新的二进制文件才能看是否审核通过。</p>
+<h3 id="2-个人账户怎么转到企业账户？"><a href="#2-个人账户怎么转到企业账户？" class="headerlink" title="2. 个人账户怎么转到企业账户？"></a><strong>2. 个人账户怎么转到企业账户？</strong></h3><p>网上有详细的教程可以参考，很简单<a href="https://www.cnblogs.com/zhanggui/p/6412659.html" target="_blank" rel="noopener">https://www.cnblogs.com/zhanggui/p/6412659.html</a></p>
+<h3 id="3-申诉邮件怎么走？"><a href="#3-申诉邮件怎么走？" class="headerlink" title="3. 申诉邮件怎么走？"></a><strong>3. 申诉邮件怎么走？</strong></h3><p>上面已经讲过注意点：</p>
+<p><a href="https://developer.apple.com/contact/app-store/?topic=appeal" target="_blank" rel="noopener">https://developer.apple.com/contact/app-store/?topic=appeal</a></p>
+<h3 id="4-关于上包封账号的原因是哪些？"><a href="#4-关于上包封账号的原因是哪些？" class="headerlink" title="4. 关于上包封账号的原因是哪些？"></a><strong>4. 关于上包封账号的原因是哪些？</strong></h3><p>您不会直接或间接地实施任何旨在干扰Apple软件或服务的行为，本协议的意图或Apple的业务实践，包括但不限于采取可能妨碍性能或预期用途的行为。 App Store，自定义应用程序分发或程序</p>
+<p>（例如，==提交您自己的应用程序或任何第三方应用程序的欺诈性评论==，为您的应用程序选择一个==与第三方应用程序的名称基本相似的名称==，以便造成消费者混淆 ，或蹲在应用程序名称上以防止合法的第三方使用）</p>
+<p>简单点说就是：刷评论、占用别的应用名称</p>
+<p>另外 还有：多次的隐藏内容、三方支付被发现、侵犯版权被举报、赌博抽奖等。</p>
+<h3 id="6-提交关键词的时候需要注意什么，有没有什么限制"><a href="#6-提交关键词的时候需要注意什么，有没有什么限制" class="headerlink" title="6.提交关键词的时候需要注意什么，有没有什么限制"></a><strong>6.提交关键词的时候需要注意什么，有没有什么限制</strong></h3><p>详情可以问问市场推广的同学，负责ASO的同学。</p>
+<h3 id="8-账号权重的好坏，有没有办法看到"><a href="#8-账号权重的好坏，有没有办法看到" class="headerlink" title="8.账号权重的好坏，有没有办法看到"></a><strong>8.账号权重的好坏，有没有办法看到</strong></h3><p>可以清楚的是：账号权重：公司账号 &gt; 海外某些国家的账号 &gt; 无不良记录的个人开发者账号 &gt; 有不良应用被拒的账号</p>
+<p>提包时候的审核速度能够非常清楚的看出来。</p>
+<h3 id="9-如何转移应用"><a href="#9-如何转移应用" class="headerlink" title="9.如何转移应用"></a><strong>9.如何转移应用</strong></h3><p>这个是教程：很简单，转移的应用也会把之前两个账号关联起来的<a href="https://www.jianshu.com/p/49182071d4ef" target="_blank" rel="noopener">https://www.jianshu.com/p/49182071d4ef</a></p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a><strong>写在最后</strong></h1><p>总结一下应对审核的整体策略：</p>
+<ol>
+<li>不要在一棵书上吊死，不要一直盲目等待，一旦发现卡审，查找问题、改变策略。</li>
+<li>站在审核人员的角度思考问题，为什么他们会拒绝你，为什么要一直在这个问题上纠结不放，肯定是有原因的。先要弄清楚他们的拒绝你的原因，然后顺着他们的意思来，按照他们的思路走，大不了最后换个账号换个包重新来过。</li>
+<li>不要跟审核人员硬刚，换玩法，找创新点去曲线救国。打法永远是：第一版只为上包，之后慢慢更新迭代。</li>
+<li>不要抱着侥幸心理，一旦出问题，不要每次只尝试改变一点点，只要下定决新要整改就彻底的改，相信我，这绝对是最最最省时间的方法。你自己试试，会回来感谢我的。</li>
+<li>坚信审核人员不是神，他也是人，办法总比问题多，大不了路子走野一点。我们又不违法，仅仅是为了上个包而已。**</li>
+</ol>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>原文作者：<a href="http://yoursite.com">Rico</a>
+            <p>原文链接：<a href="http://yoursite.com/2019/08/16/审核/">http://yoursite.com/2019/08/16/审核/</a>
+            <p>发表日期：<a href="http://yoursite.com/2019/08/16/审核/">August 16th 2019, 6:35:00 am</a>
+            <p>更新日期：<a href="http://yoursite.com/2019/08/16/审核/">August 16th 2019, 2:55:32 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2019/08/16/C-hook/" title= "自己的C函数hook">
+                    <div class="nextTitle">自己的C函数hook</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/03/05/隐私政策/" title= "隐私政策">
+                    <div class="prevTitle">隐私政策</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:358097990@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Rico358097990" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#审核"><span class="toc-number">1.</span> <span class="toc-text">审核</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#审核条款与更新"><span class="toc-number">3.</span> <span class="toc-text">审核条款与更新</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#经常遇到的审核难题和解决措施"><span class="toc-number">4.</span> <span class="toc-text">经常遇到的审核难题和解决措施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-重复-垃圾-应用（违反4-3原则）"><span class="toc-number">4.0.1.</span> <span class="toc-text">一. 重复/垃圾 应用（违反4.3原则）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-不要为同一个APP创建多个应用，也就是我们曾经做过的马甲包。表现形式为：代码雷同、UI雷同、引用名称类似、应用分类相同，被发现的结果是应用下架、封禁账号。"><span class="toc-number">4.0.2.</span> <span class="toc-text">1.不要为同一个APP创建多个应用，也就是我们曾经做过的马甲包。表现形式为：代码雷同、UI雷同、引用名称类似、应用分类相同，被发现的结果是应用下架、封禁账号。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">4.0.3.</span> <span class="toc-text">解决方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-请避免继续在已有大量类似-app-的类别下进行开发。触犯这点主要是因为我们公司之前一直都处于追热度、微创新阶段，但如果该类型APP已经烂大街了，即使看起来收益不错，我建议在立项阶段要三思。"><span class="toc-number">4.0.4.</span> <span class="toc-text">2.请避免继续在已有大量类似 app 的类别下进行开发。触犯这点主要是因为我们公司之前一直都处于追热度、微创新阶段，但如果该类型APP已经烂大街了，即使看起来收益不错，我建议在立项阶段要三思。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法-1"><span class="toc-number">4.0.5.</span> <span class="toc-text">解决方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二-大礼包（2-1狗年大礼包）"><span class="toc-number">4.0.6.</span> <span class="toc-text">二. 大礼包（2.1狗年大礼包）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案："><span class="toc-number">4.0.7.</span> <span class="toc-text">解决方案：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三-隐藏功能（2-3-1）"><span class="toc-number">4.0.8.</span> <span class="toc-text">三. 隐藏功能（2.3.1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方案：-1"><span class="toc-number">4.0.9.</span> <span class="toc-text">解决方案：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四-最小功能（4-2-minimum-functionality）"><span class="toc-number">4.0.10.</span> <span class="toc-text">四. 最小功能（4.2 minimum-functionality）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五-14天内封号问题（other）"><span class="toc-number">4.0.11.</span> <span class="toc-text">五. 14天内封号问题（other）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方式："><span class="toc-number">4.0.12.</span> <span class="toc-text">解决方式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决办法"><span class="toc-number">4.0.13.</span> <span class="toc-text">解决办法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六-其他需要注意的小问题"><span class="toc-number">4.0.14.</span> <span class="toc-text">六. 其他需要注意的小问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-App-完成度（2-1-）"><span class="toc-number">4.0.15.</span> <span class="toc-text">1. App 完成度（2.1 ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-截图与应用内容不符（2-3-准确的元数据）"><span class="toc-number">4.0.16.</span> <span class="toc-text">2. 截图与应用内容不符（2.3 准确的元数据）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-应用出现崩溃、加载失败等非常明显的Bug"><span class="toc-number">4.0.17.</span> <span class="toc-text">3. 应用出现崩溃、加载失败等非常明显的Bug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-错误使用抽奖、竞猜等促销方式"><span class="toc-number">4.0.18.</span> <span class="toc-text">4. 错误使用抽奖、竞猜等促销方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-侵犯第三方版权"><span class="toc-number">4.0.19.</span> <span class="toc-text">5. 侵犯第三方版权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-含UGC却未提供用户协议及举报功能"><span class="toc-number">4.0.20.</span> <span class="toc-text">6.含UGC却未提供用户协议及举报功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-可接受的商业模式（3-2-1-）"><span class="toc-number">4.0.21.</span> <span class="toc-text">7.可接受的商业模式（3.2.1 ）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-定位服务-5-1-5"><span class="toc-number">4.0.22.</span> <span class="toc-text">8. 定位服务 5.1.5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-禁止强制更新-强制好评"><span class="toc-number">4.0.23.</span> <span class="toc-text">9. 禁止强制更新/强制好评</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-私有API-被扫到-（2-5-1）"><span class="toc-number">4.0.24.</span> <span class="toc-text">10. 私有API 被扫到 （2.5.1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-强制登录购买-（5-1-1）"><span class="toc-number">4.0.25.</span> <span class="toc-text">11. 强制登录购买 （5.1.1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-APP处于测试模式（2-2）"><span class="toc-number">4.0.26.</span> <span class="toc-text">12. APP处于测试模式（2.2）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-未添加恢复购买按钮（3-1-1）"><span class="toc-number">4.0.27.</span> <span class="toc-text">13. 未添加恢复购买按钮（3.1.1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-使用后台服务（2-5-4）"><span class="toc-number">4.0.28.</span> <span class="toc-text">14. 使用后台服务（2.5.4）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#审核过程中需要清楚的地方"><span class="toc-number">5.</span> <span class="toc-text">审核过程中需要清楚的地方</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-审核流程"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. 审核流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-审核被拒后的回复"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 审核被拒后的回复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-善用电话支持"><span class="toc-number">5.0.3.</span> <span class="toc-text">3. 善用电话支持</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#测试部需要特别注意的地方"><span class="toc-number">6.</span> <span class="toc-text">测试部需要特别注意的地方</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#性能："><span class="toc-number">6.0.1.</span> <span class="toc-text">性能：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#支付："><span class="toc-number">6.0.2.</span> <span class="toc-text">支付：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#APP-Store后台"><span class="toc-number">6.0.3.</span> <span class="toc-text">APP Store后台</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#商务部门曾经的一些提问"><span class="toc-number">7.</span> <span class="toc-text">商务部门曾经的一些提问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-修改关键词、描述需要提新包吗？"><span class="toc-number">7.0.1.</span> <span class="toc-text">1. 修改关键词、描述需要提新包吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-个人账户怎么转到企业账户？"><span class="toc-number">7.0.2.</span> <span class="toc-text">2. 个人账户怎么转到企业账户？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-申诉邮件怎么走？"><span class="toc-number">7.0.3.</span> <span class="toc-text">3. 申诉邮件怎么走？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-关于上包封账号的原因是哪些？"><span class="toc-number">7.0.4.</span> <span class="toc-text">4. 关于上包封账号的原因是哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-提交关键词的时候需要注意什么，有没有什么限制"><span class="toc-number">7.0.5.</span> <span class="toc-text">6.提交关键词的时候需要注意什么，有没有什么限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-账号权重的好坏，有没有办法看到"><span class="toc-number">7.0.6.</span> <span class="toc-text">8.账号权重的好坏，有没有办法看到</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-如何转移应用"><span class="toc-number">7.0.7.</span> <span class="toc-text">9.如何转移应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#写在最后"><span class="toc-number">8.</span> <span class="toc-text">写在最后</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 6
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2019/08/16/C-hook/" >自己的C函数hook</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2019/08/16/审核/" >审核</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2019/03/05/隐私政策/" >隐私政策</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >Frida一键dump</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >LLDB动态调试</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2018 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">02/27</span><a class="archive-post-title" href= "/2018/02/27/9-3以下崩溃的问题/" >解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "Rico"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
