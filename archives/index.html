@@ -149,6 +149,70 @@
     
     
         <article class="index-post">
+            <a class="content-show-full" href = "/2019/08/16/C-hook/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>[Untitled Post]</span>
+                    </h2>
+                <div class="abstract-content">
+                    自己的C函数hookps：此方法仅限于没有用NS_INLINE修饰的C函数
+//XXX.xm
+void (*orig_test)(void);
+
+void new_test(void){
+    NSLog(@&quot;💖💖💖💖💖。c func hook&quot;);
+    orig_test();
+}
+
+
+static void __attribute__((constructor)) initialize(void) {
+
+     MSHookFunction(MSFindSymbol(NULL,&quot;_test&quot;), (void *)&amp;ne...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/08/16</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2019/08/16/审核/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>[Untitled Post]</span>
+                    </h2>
+                <div class="abstract-content">
+                    审核前言如今苹果审核越来越严格，各个项目组都存在各种不同的审核问题：大到产品下架、封号影响业绩，小到延迟审核耽误项目进程。针对最近频繁出现的部分审核问题，做出归纳与总结，并且根据经验给与相应的解决措施，希望今后形成公司层面上的应对苹果审核的规范。
+审核条款与更新重要网址：
+
+审核指南（最新最齐全的官方审核指南）
+ https://developer.apple.com/cn/app-store/review/guidelines/
+ 目前更新到：2018 年 12 月 19 日
+
+审核指导（官方提供有助审核的指导意见）
+ https://developer.apple.com/cn/ap...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/08/16</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
             <a class="content-show-full" href = "/2019/03/05/隐私政策/" >
                     <h2 class="abstract-title">
                         
@@ -361,7 +425,29 @@ Mac端安装
     
     
     
-    <div class="total-archive"> Total : 4 </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-archive"> Total : 6 </div>
     
     <div class="post-archive">
     
@@ -373,17 +459,27 @@ Mac端安装
     
     
         <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2019/08/16/C-hook/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/16</span><a class="archive-post-title" href= "/2019/08/16/审核/" >[Untitled Post]</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
             <span class="archive-post-date">03/05</span><a class="archive-post-title" href= "/2019/03/05/隐私政策/" >隐私政策</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >LLDB动态调试</a>
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >Frida一键dump</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >Frida一键dump</a>
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >LLDB动态调试</a>
         </li>
     
     

@@ -149,35 +149,25 @@
     
     
         <article class="index-post">
-            <a class="content-show-full" href = "/2018/02/27/9-3以下崩溃的问题/" >
+            <a class="content-show-full" href = "/2019/08/16/C-hook/" >
                     <h2 class="abstract-title">
                         
-                        <span>解决release版本在iOS9.3以下崩溃的问题（P3图片）</span>
+                        <span>[Untitled Post]</span>
                     </h2>
                 <div class="abstract-content">
-                    解决release版本在iOS9.3以下崩溃的问题先描述下一下问题：所有release版本的包（包括App Store和adHoc）在iOS9.3以下手机运行，点击任意地方崩溃，无法定位。联机调试是没有问题的。
+                    自己的C函数hookps：此方法仅限于没有用NS_INLINE修饰的C函数
+//XXX.xm
+void (*orig_test)(void);
 
-问题原因：图片资源文件里有16位图或者图片显示模式为P3
-
-解决方案：
-
-
-
-打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。
-
-
-右键name.app文件，点击显示包内容
+void new_test(void){
+    NSLog(@&quot;💖💖💖💖💖。c func hook&quot;);
+    orig_test();
+}
 
 
-在终端中cd到name.app文件夹中
+static void __attribute__((constructor)) initialize(void) {
 
-
-用find命令定位到Assets.car文件
-1$ find . -name 'Assets.car
-
-
-
-使用 assetut...
+     MSHookFunction(MSFindSymbol(NULL,&quot;_test&quot;), (void *)&amp;ne...
                 </div>
             </a>
             <div class="abstract-post-meta">
@@ -185,7 +175,37 @@
                 
                 <!-- date  -->
                 <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2018/02/27</span>
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/08/16</span>
+                </div>
+            </div>
+        </article>
+    
+    
+    
+        <article class="index-post">
+            <a class="content-show-full" href = "/2019/08/16/审核/" >
+                    <h2 class="abstract-title">
+                        
+                        <span>[Untitled Post]</span>
+                    </h2>
+                <div class="abstract-content">
+                    审核前言如今苹果审核越来越严格，各个项目组都存在各种不同的审核问题：大到产品下架、封号影响业绩，小到延迟审核耽误项目进程。针对最近频繁出现的部分审核问题，做出归纳与总结，并且根据经验给与相应的解决措施，希望今后形成公司层面上的应对苹果审核的规范。
+审核条款与更新重要网址：
+
+审核指南（最新最齐全的官方审核指南）
+ https://developer.apple.com/cn/app-store/review/guidelines/
+ 目前更新到：2018 年 12 月 19 日
+
+审核指导（官方提供有助审核的指导意见）
+ https://developer.apple.com/cn/ap...
+                </div>
+            </a>
+            <div class="abstract-post-meta">
+                <!-- tags  -->
+                
+                <!-- date  -->
+                <div class="abstract-date">
+                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2019/08/16</span>
                 </div>
             </div>
         </article>
