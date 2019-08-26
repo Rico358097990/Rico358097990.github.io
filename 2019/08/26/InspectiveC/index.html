@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Rico&#39;s blog</title>
+    <title>InspectiveC 使用 · Rico&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,12 +203,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Rico&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">InspectiveC 使用</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Rico's blog.</a>
 </header>
@@ -220,24 +231,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            InspectiveC 使用
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>字数统计: <span class="post-count word-count">300</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/08/26</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -338,136 +393,60 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/26/InspectiveC/" >
-            
-                <span>InspectiveC 使用</span>
-        </a>
-        <div class="abstract-content">
-            InspectiveC有时候我们想跟踪一个程序，看看这个程序的执行流程是什么样的，以及某个函数的调用参数是什么。常规的方法是把APP的可执行文件砸壳，然后放到IDA中分析，然后在汇编中寻找objc_msgSend，一层一层跟下去。这是比较笨的办法，而且不能动态查看函数的参数。
-通过InspectiveC,我们可以动态的查看：
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="InspectiveC"><a href="#InspectiveC" class="headerlink" title="InspectiveC"></a>InspectiveC</h1><p>有时候我们想跟踪一个程序，看看这个程序的执行流程是什么样的，以及某个函数的调用参数是什么。常规的方法是把APP的可执行文件砸壳，然后放到IDA中分析，然后在汇编中寻找objc_msgSend，一层一层跟下去。这是比较笨的办法，而且不能动态查看函数的参数。</p>
+<p>通过InspectiveC,我们可以动态的查看：</p>
+<ul>
+<li>某个类的所有方法调用情况</li>
+<li>某个类的某个方法的调用情况</li>
+<li>某个类的实例对象的所有方法的调用情况</li>
+<li>某个类的实例对象的某个方法的调用情况</li>
+<li>某个方法签名的调用情况</li>
+</ul>
+<p>项目地址: <a href="https://github.com/DavidGoldman/InspectiveC" target="_blank" rel="noopener">https://github.com/DavidGoldman/InspectiveC</a></p>
+<ol>
+<li>cydia中添加<a href="http://apt.golddavid.com/源" target="_blank" rel="noopener">http://apt.golddavid.com/源</a></li>
+<li>安装<a href="https://github.com/DavidGoldman/InspectiveC" target="_blank" rel="noopener">InspectiveC</a></li>
+<li>在手机的/usr/lib中找到libinspectivec.dylib，把这个文件复制到Mac中/opt/theos/lib目录下</li>
+<li>在github库中找到InspCWrapper.m，复制到tweak目录下，然后在tweak文件中包含这个文件：#include “InspCWrapper.m”</li>
+<li>在想要开始观察的地方加上如下语句：watchClass(%c(SomeClass));</li>
+<li>make 3连</li>
+<li>接下来就去Documents目录下找log吧！</li>
+</ol>
+<p>Enjoy your hook～</p>
 
-某个类的所有方法调用情况
-某个类的某个方法的调用情况
-某个类的实例对象的所有方法的调用情况
-某个类的实例对象的某个方法的调用情况
-某个方法签名的调用情况
-
-项目地址: https://github.com/DavidGoldman/InspectiveC
-
-cyd...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/26</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
     </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/19/Fastlane-modify/" >
-            
-                <span>Fastlane modify</span>
-        </a>
-        <div class="abstract-content">
-            Fastlane modify起因：通过SSL kill Switch2破解掉苹果的双向验证后，抓到一个接口，结果发现该接口cookie有时效性，每隔8小时就会时失效，于是乎想着有什么简便方法可以自动延长时效，前段时间研究超级签名的时候了解到了Fastlane-Spaceship，就想着能不能从这里入手。
-通过研究fastlane源码了解到，fastlane每次调用苹果接口的时候就会执行login方法，然后获取到了cookie，最后放入目标接口中。
-Modify开始
-我们的目标文件：/fastlane-2.129.0/spaceship/lib/spaceship/portal/port...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/19</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/16/C-hook/" >
-            
-                <span>自己的C函数hook</span>
-        </a>
-        <div class="abstract-content">
-            自己的C函数hookps：此方法仅限于没有用NS_INLINE修饰的C函数
-//XXX.xm
-void (*orig_test)(void);
-
-void new_test(void){
-    NSLog(@&quot;💖💖💖💖💖。c func hook&quot;);
-    orig_test();
-}
-
-
-static void __attribute__((constructor)) initialize(void) {
-
-     MSHookFunction(MSFindSymbol(NULL,&quot;_test&quot;), (void *)&amp;ne...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/16/审核/" >
-            
-                <span>审核</span>
-        </a>
-        <div class="abstract-content">
-            审核前言如今苹果审核越来越严格，各个项目组都存在各种不同的审核问题：大到产品下架、封号影响业绩，小到延迟审核耽误项目进程。针对最近频繁出现的部分审核问题，做出归纳与总结，并且根据经验给与相应的解决措施，希望今后形成公司层面上的应对苹果审核的规范。
-审核条款与更新重要网址：
-
-审核指南（最新最齐全的官方审核指南）
- https://developer.apple.com/cn/app-store/review/guidelines/
- 目前更新到：2018 年 12 月 19 日
-
-审核指导（官方提供有助审核的指导意见）
- https://developer.apple.com/cn/ap...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
+    <!-- license  -->
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/08/19/Fastlane-modify/" title= "Fastlane modify">
+                    <div class="prevTitle">Fastlane modify</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -545,6 +524,24 @@ static void __attribute__((constructor)) initialize(void) {
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#InspectiveC"><span class="toc-number">1.</span> <span class="toc-text">InspectiveC</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -769,6 +766,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
