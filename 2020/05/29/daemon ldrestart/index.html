@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>解决release版本在iOS9.3以下崩溃的问题（P3图片） · Rico&#39;s blog</title>
+    <title>daemon执行ldrestart问题 · Rico&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Rico&#39;s blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
+                <a href="#" class="post-name">daemon执行ldrestart问题</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            解决release版本在iOS9.3以下崩溃的问题（P3图片）
+            daemon执行ldrestart问题
             <!-- 404 -->
             
         </h1>
@@ -264,14 +264,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "逆向">逆向</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">238</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">374</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/02/27</span>
+                    <span class="post-intro-time">2020/05/29</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,43 +401,14 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="解决release版本在iOS9-3以下崩溃的问题"><a href="#解决release版本在iOS9-3以下崩溃的问题" class="headerlink" title="解决release版本在iOS9.3以下崩溃的问题"></a>解决release版本在iOS9.3以下崩溃的问题</h1><p>先描述下一下问题：所有release版本的包（包括App Store和adHoc）在iOS9.3以下手机运行，点击任意地方崩溃，无法定位。联机调试是没有问题的。</p>
-<ul>
-<li><p>问题原因：图片资源文件里有16位图或者图片显示模式为P3</p>
-</li>
-<li><p>解决方案：</p>
-</li>
-</ul>
-<ol>
-<li>打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。</li>
-</ol>
-<ol>
-<li>右键name.app文件，点击显示包内容</li>
-</ol>
-<ol>
-<li>在终端中cd到name.app文件夹中</li>
-</ol>
-<ol>
-<li><p>用find命令定位到Assets.car文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">'Assets.car</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>使用 assetutil 命令导出图片的信息存储到Assets.json文件中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>打开生成的Assets.json文件 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ open /tmp/Assets.json</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>查找含有”DisplayGamut” : “P3”, “Encoding” : “ARGB-16″</li>
-</ol>
-<ol>
-<li>Name字段即为有问题图片的名字，其替换掉重新打包上传，问题解决</li>
-</ol>
+        <h1 id="daemon执行ldrestart问题"><a href="#daemon执行ldrestart问题" class="headerlink" title="daemon执行ldrestart问题"></a>daemon执行ldrestart问题</h1><h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>在daemon中调用ldrestart的时候发现一个问题，ldrestart不能完整执行，经过问题定位发现执行ldrestart后，自身也被ldrestart命令kill掉了，所以没有继续执行下去。</p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>怎么才能执行ldrestart的时候跳过自身daemon，通过论坛提问及自己思考，通过修改ldrestart源码及重新编译后能完美解决，但是有了源码怎么才能变成一个可执行的且强大的ldrestart呢，最后决定模仿root daemon来解决。</p>
+<h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p>比较后发现自定义ldrestart只是不需要launchctl 且 把可执行文件copy到/usr/bin目录下即可</p>
+<p>so 修改postinst，执行 cp 命令</p>
+<h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2><p>上源码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">#include &lt;signal.h&gt;</span><br><span class="line">#include &lt;sysexits.h&gt;</span><br><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;launch.h&gt;</span><br><span class="line"></span><br><span class="line">#include &lt;sys/stat.h&gt;</span><br><span class="line"></span><br><span class="line">#include "LYRunloop.h"</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> process(launch_data_t value, <span class="keyword">const</span> char *name, <span class="keyword">void</span> *baton) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!strstr(name, <span class="string">"apple"</span>))</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (launch_data_get_type(value) != LAUNCH_DATA_DICTIONARY)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    auto integer(launch_data_dict_lookup(value, LAUNCH_JOBKEY_PID));</span><br><span class="line">    <span class="keyword">if</span> (integer == NULL || launch_data_get_type(integer) != LAUNCH_DATA_INTEGER)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    auto pid(launch_data_get_integer(integer));</span><br><span class="line">    <span class="keyword">if</span> (kill(pid, <span class="number">0</span>) == <span class="number">-1</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    auto string(launch_data_dict_lookup(value, LAUNCH_JOBKEY_LABEL));</span><br><span class="line">    <span class="keyword">if</span> (string == NULL || launch_data_get_type(string) != LAUNCH_DATA_STRING)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    auto label(launch_data_get_string(string));</span><br><span class="line"></span><br><span class="line">    auto stop(launch_data_alloc(LAUNCH_DATA_DICTIONARY));</span><br><span class="line">    launch_data_dict_insert(stop, string, LAUNCH_KEY_STOPJOB);</span><br><span class="line"></span><br><span class="line">    auto result(launch_msg(stop));</span><br><span class="line">    launch_data_free(stop);</span><br><span class="line">    <span class="keyword">if</span> (result == NULL)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (launch_data_get_type(result) != LAUNCH_DATA_ERRNO)</span><br><span class="line">        NSLog(@<span class="string">"yr:ioser:%s\n"</span>, label);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (auto number = launch_data_get_errno(result))</span><br><span class="line">        NSLog(@<span class="string">"yr:%s: %s\n"</span>, label, strerror(number));</span><br><span class="line"></span><br><span class="line">    launch_data_free(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv, char **envp) &#123;</span><br><span class="line">    NSLog(@<span class="string">"ldrestar: ldrestar start"</span>);</span><br><span class="line">    auto request(launch_data_new_string(LAUNCH_KEY_GETJOBS));</span><br><span class="line">    auto response(launch_msg(request));</span><br><span class="line">    launch_data_free(request);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (response == NULL)</span><br><span class="line">        <span class="keyword">return</span> EX_UNAVAILABLE;</span><br><span class="line">    <span class="keyword">if</span> (launch_data_get_type(response) != LAUNCH_DATA_DICTIONARY)</span><br><span class="line">        <span class="keyword">return</span> EX_SOFTWARE;</span><br><span class="line">    launch_data_dict_iterate(response, &amp;process, NULL);</span><br><span class="line">    <span class="keyword">return</span> EX_OK;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上源码在coolstart</p>
+<p><a href="https://github.com/coolstar/uikittools-theos" target="_blank" rel="noopener">coolstar/uikittools-theos</a></p>
 
     </article>
     <!-- license  -->
@@ -441,12 +418,17 @@ height:50vh;
         <li class="next">
             
                 <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/02/26/Frida一键dump/" title= "Frida一键dump">
-                    <div class="nextTitle">Frida一键dump</div>
+                <a href= "/2020/05/29/Deamon & Root App/" title= "Deamon && Root App">
+                    <div class="nextTitle">Deamon && Root App</div>
                 </a>
             
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/08/26/InspectiveC/" title= "InspectiveC 使用">
+                    <div class="prevTitle">InspectiveC 使用</div>
+                </a>
             
         </li>
     </ul>
@@ -557,7 +539,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解决release版本在iOS9-3以下崩溃的问题"><span class="toc-number">1.</span> <span class="toc-text">解决release版本在iOS9.3以下崩溃的问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#daemon执行ldrestart问题"><span class="toc-number">1.</span> <span class="toc-text">daemon执行ldrestart问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01"><span class="toc-number">1.1.</span> <span class="toc-text">0x01</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02"><span class="toc-number">1.2.</span> <span class="toc-text">0x02</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03"><span class="toc-number">1.3.</span> <span class="toc-text">0x03</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x04"><span class="toc-number">1.4.</span> <span class="toc-text">0x04</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

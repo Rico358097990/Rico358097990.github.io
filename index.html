@@ -359,6 +359,86 @@ height:50vh;
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/05/29/Deamon & Root App/" >
+            
+                <span>Deamon &amp;&amp; Root App</span>
+        </a>
+        <div class="abstract-content">
+            Deamon &amp;&amp; Root AppDeamon
+daemon包括三个部分:一个可执行的二进制文件、一个plist配置文件、一个二进制文件授权文件
+
+注意事项
+测试环境
+macOS: 10.14.6
+iPhoneOS: iOS11.0和iOS12.0
+iPhone机型：两个iPhone6
+
+
+关于链接
+原文传送门 6
+阅读本文前，请首先阅读狗神的Run a daemon (as root) on iOS 6
+
+
+
+可执行二进制文件配置
+下载最新版theos,利用theos来创建一个可执行二进制文件
+  1TemplateNamein
+
+sublime打开main.mm填入...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "逆向">逆向</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/05/29/daemon ldrestart/" >
+            
+                <span>daemon执行ldrestart问题</span>
+        </a>
+        <div class="abstract-content">
+            daemon执行ldrestart问题0x01在daemon中调用ldrestart的时候发现一个问题，ldrestart不能完整执行，经过问题定位发现执行ldrestart后，自身也被ldrestart命令kill掉了，所以没有继续执行下去。
+0x02怎么才能执行ldrestart的时候跳过自身daemon，通过论坛提问及自己思考，通过修改ldrestart源码及重新编译后能完美解决，但是有了源码怎么才能变成一个可执行的且强大的ldrestart呢，最后决定模仿root daemon来解决。
+0x03比较后发现自定义ldrestart只是不需要launchctl 且 把可执行文件cop...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "逆向">逆向</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2019/08/26/InspectiveC/" >
             
                 <span>InspectiveC 使用</span>
@@ -858,9 +938,39 @@ Mac端安装
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 8
+        Total : 10
         </div>
         <!-- search  -->
         
@@ -870,6 +980,25 @@ Mac端安装
     
     
     
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2020/05/29/Deamon & Root App/" >Deamon && Root App</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2020/05/29/daemon ldrestart/" >daemon执行ldrestart问题</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
     
     <div class="archive-year"> 2019 </div>
     <ul class="year-list">
@@ -901,12 +1030,12 @@ Mac端安装
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >LLDB动态调试</a>
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >Frida一键dump</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/Frida一键dump/" >Frida一键dump</a>
+            <span class="archive-post-date">02/26</span><a class="archive-post-title" href= "/2019/02/26/LLDB动态调试/" >LLDB动态调试</a>
         </li>
     
     
@@ -927,6 +1056,8 @@ Mac端安装
   </div>
         <div class="sidebar-panel-tags">
     <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="逆向"><span class="iconfont-archer">&#xe606;</span>逆向</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

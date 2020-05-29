@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>解决release版本在iOS9.3以下崩溃的问题（P3图片） · Rico&#39;s blog</title>
+    <title>Deamon &amp;&amp; Root App · Rico&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >Rico&#39;s blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
+                <a href="#" class="post-name">Deamon && Root App</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            解决release版本在iOS9.3以下崩溃的问题（P3图片）
+            Deamon && Root App
             <!-- 404 -->
             
         </h1>
@@ -264,14 +264,20 @@ height:50vh;
             <div class="post-intros">
                 <!-- 文章页标签  -->
                 
+                    <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "逆向">逆向</a>
+    
+</div>
+                
                 
                     <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">238</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
+                        <span>字数统计: <span class="post-count word-count">1k</span>阅读时长: <span class="post-count reading-time">5 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/02/27</span>
+                    <span class="post-intro-time">2020/05/29</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -395,43 +401,87 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="解决release版本在iOS9-3以下崩溃的问题"><a href="#解决release版本在iOS9-3以下崩溃的问题" class="headerlink" title="解决release版本在iOS9.3以下崩溃的问题"></a>解决release版本在iOS9.3以下崩溃的问题</h1><p>先描述下一下问题：所有release版本的包（包括App Store和adHoc）在iOS9.3以下手机运行，点击任意地方崩溃，无法定位。联机调试是没有问题的。</p>
-<ul>
-<li><p>问题原因：图片资源文件里有16位图或者图片显示模式为P3</p>
+        <h1 id="Deamon-amp-amp-Root-App"><a href="#Deamon-amp-amp-Root-App" class="headerlink" title="Deamon &amp;&amp; Root App"></a>Deamon &amp;&amp; Root App</h1><h1 id="Deamon"><a href="#Deamon" class="headerlink" title="Deamon"></a>Deamon</h1><blockquote>
+<p>daemon包括三个部分:一个可执行的二进制文件、一个plist配置文件、一个二进制文件授权文件</p>
+</blockquote>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
+<li>测试环境<ul>
+<li>macOS: 10.14.6</li>
+<li>iPhoneOS: iOS11.0和iOS12.0</li>
+<li>iPhone机型：两个iPhone6</li>
+</ul>
 </li>
-<li><p>解决方案：</p>
+<li>关于链接<ul>
+<li><a href="https://www.diffit.cn/2019/07/29/RunDaemonAsRoot/" target="_blank" rel="noopener">原文传送门 6</a></li>
+<li>阅读本文前，请首先阅读狗神的<a href="http://iosre.com/t/run-a-daemon-as-root-on-ios/212" target="_blank" rel="noopener">Run a daemon (as root) on iOS 6</a></li>
+</ul>
 </li>
 </ul>
-<ol>
-<li>打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。</li>
-</ol>
-<ol>
-<li>右键name.app文件，点击显示包内容</li>
-</ol>
-<ol>
-<li>在终端中cd到name.app文件夹中</li>
-</ol>
-<ol>
-<li><p>用find命令定位到Assets.car文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">'Assets.car</span></span><br></pre></td></tr></table></figure>
+<h2 id="可执行二进制文件配置"><a href="#可执行二进制文件配置" class="headerlink" title="可执行二进制文件配置"></a>可执行二进制文件配置</h2><ul>
+<li><p>下载最新版theos,利用theos来创建一个可执行二进制文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TemplateNamein</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li><p>使用 assetutil 命令导出图片的信息存储到Assets.json文件中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json</span><br></pre></td></tr></table></figure>
+<li><p>sublime打开<code>main.mm</code>填入以下内容</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;spawn.h&gt;</span><br><span class="line"></span><br><span class="line">int spawn(const char* executable, ...) &#123;</span><br><span class="line">    int     ret;</span><br><span class="line">    pid_t   pid;</span><br><span class="line">    va_list args;</span><br><span class="line">    va_start(args, executable);</span><br><span class="line">    setuid(0);</span><br><span class="line">    ret = posix_spawn(&amp;pid, executable, NULL, NULL, (char* const *)args, NULL);</span><br><span class="line">    if (ret == 0) waitpid(pid, NULL, 0);</span><br><span class="line">    return ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static void logout(CFNotificationCenterRef center, void   *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) &#123;</span><br><span class="line">    spawn(&quot;/usr/bin/killall&quot;, &quot;/usr/bin/killall&quot;, &quot;-9&quot;, &quot;SpringBoard&quot;, NULL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(int argc, char **argv, char **envp) &#123;</span><br><span class="line">    NSLog(@&quot;k9sd: k9sd is launched!&quot;);</span><br><span class="line">    CFNotificationCenterAddObserver(  CFNotificationCenterGetDarwinNotifyCenter(), NULL, logout,   CFSTR(&quot;com.slfh.k9sd.logout&quot;), NULL,   CFNotificationSuspensionBehaviorCoalesce);</span><br><span class="line">    CFRunLoopRun(); // keep it running in background</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li><p>打开生成的Assets.json文件 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ open /tmp/Assets.json</span><br></pre></td></tr></table></figure>
+</ul>
+<h2 id="plist文件配置"><a href="#plist文件配置" class="headerlink" title="plist文件配置"></a>plist文件配置</h2><ul>
+<li><p>创建plist文件并配置权限</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd k9sd/</span><br><span class="line">$ touch com.slfh.k9sd.plist</span><br><span class="line">$ chmod 644 com.slfh.k9sd.plist</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
-<li>查找含有”DisplayGamut” : “P3”, “Encoding” : “ARGB-16″</li>
-</ol>
-<ol>
-<li>Name字段即为有问题图片的名字，其替换掉重新打包上传，问题解决</li>
-</ol>
+<li><p>安装后把<code>com.slfh.k9sd.plist</code>放到iPhone上的<code>/Library/LaunchDaemons/</code>目录</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ./Layout/Library/LaunchDaemons/</span><br><span class="line">$ mv com.slfh.k9sd.plist ./Layout/Library/LaunchDaemons/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>sublime打开<code>com.slfh.k9sd.plist</code>,并填入内容</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs  /PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">        &lt;key&gt;KeepAlive&lt;/key&gt;</span><br><span class="line">        &lt;true/&gt;</span><br><span class="line">        &lt;key&gt;Label&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;com.slfh.k9sd&lt;/string&gt;</span><br><span class="line">        &lt;key&gt;Program&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;/usr/bin/k9sd&lt;/string&gt;</span><br><span class="line">        &lt;key&gt;RunAtLoad&lt;/key&gt;</span><br><span class="line">        &lt;true/&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><ul>
+<li>利用<code>make install</code>进行安装</li>
+<li>安装后ssh进入iPhone执行<code>ps -e | grep k9sd</code>,发现并没有启动</li>
+<li><p>使用控制台可以查看如下错误，错误是由于没有给二进制文件授权</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Sandbox: hook..execve() killing k9sd[pid=14153, uid=0]: outside of container &amp;&amp; !i_can_has_debugger</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="二进制文件授权"><a href="#二进制文件授权" class="headerlink" title="二进制文件授权"></a>二进制文件授权</h2><ul>
+<li><p>新建授权文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch ./Layout/Library/LaunchDaemons/com.slfh.k9sd.entitlements</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开<code>com.slfh.k9sd.entitlements</code>,填入以下内容</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs  /PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">&lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">&lt;dict&gt;</span><br><span class="line">    &lt;key&gt;platform-application&lt;/key&gt;</span><br><span class="line">    &lt;true/&gt;</span><br><span class="line">&lt;/dict&gt;</span><br><span class="line">&lt;/plist&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建postinst文件,作用是deb安装完成后执行相应的命令</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir ./bin</span><br><span class="line">$ touch ./bin/postinst</span><br><span class="line">$ chmod 755 ./bin/postinst</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开postinst文件，填入以下内容</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">/usr/bin/ldid -S/Library/LaunchDaemons/com.slfh.k9sd.entitlements /usr/bin/k9sd;</span><br><span class="line">/bin/launchctl load /Library/LaunchDaemons/com.slfh.k9sd.plist;</span><br><span class="line">exit 0;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开Makefile文件填入以下内容(如果make错误，需要把这些命令缩进对齐然后再次tab)</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">before-package::  </span><br><span class="line">  cp ./bin/postinst ./.theos/_/DEBIAN/</span><br><span class="line">  rm -rf ./packages/*.deb</span><br><span class="line"></span><br><span class="line">after-install::</span><br><span class="line">  install.exec &quot;killall -9 SpringBoard&quot;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="再次测试"><a href="#再次测试" class="headerlink" title="再次测试"></a>再次测试</h2><ul>
+<li>利用<code>make clean &amp;&amp; make &amp;&amp; make package &amp;&amp; make install</code>进行安装(记得要先打包然后安装!!!)</li>
+<li><p>安装后ssh进入iPhone执行<code>ps aux | grep k9sd</code>,发现已经启动了</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ceshijiiphone7:~ root# ps aux | grep k9sd</span><br><span class="line">root            2095   0.0  0.0  4196480     96 s000  T+    2:20PM   0:00.01 grep k9sd</span><br><span class="line">root            1594   0.0  0.4  4219904   7696   ??  Ss    1:24PM   0:00.01 /usr/bin/k9sd</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用Cycript发送通知，进行重启SpringBoard操作</p>
+</li>
+</ul>
+<p><a href="https://www.diffit.cn//2019/04/25/RunCycriptOniOS11/" target="_blank" rel="noopener">iOS11使用Cycript参考</a></p>
+<p><a href="https://www.diffit.cn//2019/06/29/RunCycriptOniOS12/" target="_blank" rel="noopener">iOS12使用Cycript参考</a></p>
+<ul>
+<li><p>iOS11如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">slfh:~ root# cycript -p SpringBoard</span><br><span class="line">cy# np = @encode(unsigned int(*)(char const*))(dlsym(RTLD_DEFAULT,     &quot;notify_post&quot;))</span><br><span class="line">&amp;(extern &quot;C&quot; unsigned int notify_post(char const*))</span><br><span class="line">cy# np(&quot;com.slfh.k9sd.logout&quot;)</span><br><span class="line">[14621] DarwinInjector.cpp[246]: _krncall(mach_vm_read_overwrite) =10000003</span><br><span class="line">*** _assert(status == 0):../Inject.cpp(143):InjectLibrary</span><br><span class="line">slfh:~ root#</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>iOS12如下</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">iPhone:~ root# cyrun -n SpringBoard -e -d -f</span><br><span class="line">applicationName: SpringBoard is running (9707)</span><br><span class="line">    executableName: SpringBoard</span><br><span class="line">    bundleIdentifier: com.apple.springboard</span><br><span class="line">    Cycript is inactive:</span><br><span class="line">    Device is not passcode locked</span><br><span class="line">    Tweak Mode</span><br><span class="line">Waiting for Process to close...</span><br><span class="line">Waiting for SpringBoard to launch...</span><br><span class="line">Waiting for Cycript to become active...</span><br><span class="line">Success, you may now run</span><br><span class="line">    cycript -r 127.0.0.1:8556</span><br><span class="line">cy# np = @encode(unsigned int(*)(char const*))(dlsym(RTLD_DEFAULT,         &quot;notify_post&quot;))</span><br><span class="line">&amp;(extern &quot;C&quot; unsigned int notify_post(char const*))</span><br><span class="line">cy# &amp;(extern &quot;C&quot; unsigned int notify_post(char const*))</span><br><span class="line">&amp;(extern &quot;C&quot; unsigned int notify_post(char const*))</span><br><span class="line">cy# np(&quot;com.slfh.k9sd.logout&quot;)</span><br><span class="line">0</span><br><span class="line">cy#</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>成功，到此结束</p>
+</li>
+</ul>
+<h1 id="Root-App"><a href="#Root-App" class="headerlink" title="Root App"></a>Root App</h1><p>参考iosre文章：</p>
+<p><a href="http://iosre.com/t/run-an-app-as-root-on-ios11-and-ios12/16196" target="_blank" rel="noopener">Run an App as root on iOS11 and iOS12</a></p>
 
     </article>
     <!-- license  -->
@@ -440,13 +490,13 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/02/26/Frida一键dump/" title= "Frida一键dump">
-                    <div class="nextTitle">Frida一键dump</div>
-                </a>
-            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/05/29/daemon ldrestart/" title= "daemon执行ldrestart问题">
+                    <div class="prevTitle">daemon执行ldrestart问题</div>
+                </a>
             
         </li>
     </ul>
@@ -557,7 +607,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解决release版本在iOS9-3以下崩溃的问题"><span class="toc-number">1.</span> <span class="toc-text">解决release版本在iOS9.3以下崩溃的问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Deamon-amp-amp-Root-App"><span class="toc-number">1.</span> <span class="toc-text">Deamon && Root App</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Deamon"><span class="toc-number">2.</span> <span class="toc-text">Deamon</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注意事项"><span class="toc-number">2.1.</span> <span class="toc-text">注意事项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可执行二进制文件配置"><span class="toc-number">2.2.</span> <span class="toc-text">可执行二进制文件配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#plist文件配置"><span class="toc-number">2.3.</span> <span class="toc-text">plist文件配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试"><span class="toc-number">2.4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二进制文件授权"><span class="toc-number">2.5.</span> <span class="toc-text">二进制文件授权</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#再次测试"><span class="toc-number">2.6.</span> <span class="toc-text">再次测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Root-App"><span class="toc-number">3.</span> <span class="toc-text">Root App</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

@@ -22,7 +22,7 @@
     <meta name="description" content="">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>解决release版本在iOS9.3以下崩溃的问题（P3图片） · Rico&#39;s blog</title>
+    <title>Rico&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -203,23 +203,12 @@
 </head>
 
     
-        <body class="post-body">
-    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
-    
-    <div class="banner">
-            <div class="blog-title">
-                <a href="/" >Rico&#39;s blog.</a>
-            </div>
-            <div class="post-title">
-                <a href="#" class="post-name">解决release版本在iOS9.3以下崩溃的问题（P3图片）</a>
-            </div>
-    </div>
     
     <a class="home-link" href=/>Rico's blog.</a>
 </header>
@@ -231,68 +220,24 @@
 
 
 
-
-height:50vh;
 ">
     
     <!-- 主页  -->
-    
-    
-    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
-            
-            解决release版本在iOS9.3以下崩溃的问题（P3图片）
-            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
-            
-            <!-- 404 -->
-            
         </p>
         <!-- 文章页meta -->
-        
-            <div class="post-intros">
-                <!-- 文章页标签  -->
-                
-                
-                    <div class="post-intro-read">
-                        <span>字数统计: <span class="post-count word-count">238</span>阅读时长: <span class="post-count reading-time">1 min</span></span>
-                    </div>
-                
-                <div class="post-intro-meta">
-                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2018/02/27</span>
-                    
-                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
-                        <span class="iconfont-archer">&#xe602;</span>
-                        <span id="busuanzi_value_page_pv"></span>
-                    </span>
-                    
-                    <span class="shareWrapper">
-                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
-                        <span class="shareText">Share</span>
-                        <ul class="shareList">
-                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
-                                <div class="share-qrcode"></div>
-                            </li>
-                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
-                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
-                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
-                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
-                        </ul>
-                    </span>
-                </div>
-            </div>
         
     </div>
 </div>
@@ -393,77 +338,90 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main post-page">
-    <article class="article-entry">
-        <h1 id="解决release版本在iOS9-3以下崩溃的问题"><a href="#解决release版本在iOS9-3以下崩溃的问题" class="headerlink" title="解决release版本在iOS9.3以下崩溃的问题"></a>解决release版本在iOS9.3以下崩溃的问题</h1><p>先描述下一下问题：所有release版本的包（包括App Store和adHoc）在iOS9.3以下手机运行，点击任意地方崩溃，无法定位。联机调试是没有问题的。</p>
-<ul>
-<li><p>问题原因：图片资源文件里有16位图或者图片显示模式为P3</p>
-</li>
-<li><p>解决方案：</p>
-</li>
-</ul>
-<ol>
-<li>打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。</li>
-</ol>
-<ol>
-<li>右键name.app文件，点击显示包内容</li>
-</ol>
-<ol>
-<li>在终端中cd到name.app文件夹中</li>
-</ol>
-<ol>
-<li><p>用find命令定位到Assets.car文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ find . -name <span class="string">'Assets.car</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>使用 assetutil 命令导出图片的信息存储到Assets.json文件中</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li><p>打开生成的Assets.json文件 </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ open /tmp/Assets.json</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<ol>
-<li>查找含有”DisplayGamut” : “P3”, “Encoding” : “ARGB-16″</li>
-</ol>
-<ol>
-<li>Name字段即为有问题图片的名字，其替换掉重新打包上传，问题解决</li>
-</ol>
+            <main class="main index-page">
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/05/29/Deamon & Root App/" >
+            
+                <span>Deamon &amp;&amp; Root App</span>
+        </a>
+        <div class="abstract-content">
+            Deamon &amp;&amp; Root AppDeamon
+daemon包括三个部分:一个可执行的二进制文件、一个plist配置文件、一个二进制文件授权文件
 
+注意事项
+测试环境
+macOS: 10.14.6
+iPhoneOS: iOS11.0和iOS12.0
+iPhone机型：两个iPhone6
+
+
+关于链接
+原文传送门 6
+阅读本文前，请首先阅读狗神的Run a daemon (as root) on iOS 6
+
+
+
+可执行二进制文件配置
+下载最新版theos,利用theos来创建一个可执行二进制文件
+  1TemplateNamein
+
+sublime打开main.mm填入...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "逆向">逆向</a>
+    
+</div>
+            
+        </div>
     </article>
-    <!-- license  -->
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
+        <a class="abstract-title" href = "/2020/05/29/daemon ldrestart/" >
+            
+                <span>daemon执行ldrestart问题</span>
+        </a>
+        <div class="abstract-content">
+            daemon执行ldrestart问题0x01在daemon中调用ldrestart的时候发现一个问题，ldrestart不能完整执行，经过问题定位发现执行ldrestart后，自身也被ldrestart命令kill掉了，所以没有继续执行下去。
+0x02怎么才能执行ldrestart的时候跳过自身daemon，通过论坛提问及自己思考，通过修改ldrestart源码及重新编译后能完美解决，但是有了源码怎么才能变成一个可执行的且强大的ldrestart呢，最后决定模仿root daemon来解决。
+0x03比较后发现自定义ldrestart只是不需要launchctl 且 把可执行文件cop...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/05/29</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "逆向">逆向</a>
+    
+</div>
+            
+        </div>
+    </article>
     
     <!-- paginator  -->
-    <ul class="post-paginator">
-        <li class="next">
-            
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/02/26/Frida一键dump/" title= "Frida一键dump">
-                    <div class="nextTitle">Frida一键dump</div>
-                </a>
-            
-        </li>
-        <li class="previous">
-            
-        </li>
-    </ul>
-    <!-- 评论插件 -->
-    <!-- 来必力City版安装代码 -->
-
-<!-- City版安装代码已完成 -->
     
-    
-    <!-- partial('_partial/comment/changyan') -->
-    <!--PC版-->
-
-
-    
-    
-
-    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -541,24 +499,6 @@ height:50vh;
 </footer>
     </div>
     <!-- toc -->
-    
-    <div class="toc-wrapper" style=
-    
-
-
-
-
-
-
-
-top:50vh;
-
-    >
-        <div class="toc-catalog">
-            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
-        </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解决release版本在iOS9-3以下崩溃的问题"><span class="toc-number">1.</span> <span class="toc-text">解决release版本在iOS9.3以下崩溃的问题</span></a></li></ol>
-    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -832,8 +772,6 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
-    
-        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
