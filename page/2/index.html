@@ -78,8 +78,6 @@
     <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
     
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
 - testing support for link[rel=preload]
@@ -203,8 +201,10 @@
 </head>
 
     
+        <body class="home-body">
     
-<header class="header">
+    
+<header class="header index-header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
@@ -220,21 +220,34 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 文章页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/index-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            Rico's blog.
+            <!-- 文章页  -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
+            
+            
+                Just do IT
+            
+            <!-- 文章页  -->
             
         </p>
         <!-- 文章页meta -->
@@ -346,206 +359,39 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/26/InspectiveC/" >
+        <a class="abstract-title" href = "/2018/02/27/9-3以下崩溃的问题/" >
             
-                <span>InspectiveC 使用</span>
+                <span>解决release版本在iOS9.3以下崩溃的问题（P3图片）</span>
         </a>
         <div class="abstract-content">
-            InspectiveC有时候我们想跟踪一个程序，看看这个程序的执行流程是什么样的，以及某个函数的调用参数是什么。常规的方法是把APP的可执行文件砸壳，然后放到IDA中分析，然后在汇编中寻找objc_msgSend，一层一层跟下去。这是比较笨的办法，而且不能动态查看函数的参数。
-通过InspectiveC,我们可以动态的查看：
+            解决release版本在iOS9.3以下崩溃的问题先描述下一下问题：所有release版本的包（包括App Store和adHoc）在iOS9.3以下手机运行，点击任意地方崩溃，无法定位。联机调试是没有问题的。
 
-某个类的所有方法调用情况
-某个类的某个方法的调用情况
-某个类的实例对象的所有方法的调用情况
-某个类的实例对象的某个方法的调用情况
-某个方法签名的调用情况
+问题原因：图片资源文件里有16位图或者图片显示模式为P3
 
-项目地址: https://github.com/DavidGoldman/InspectiveC
+解决方案：
 
-cyd...
+
+
+打一个ipa包，重命名为.zip 解压，进入到你应用的Playload文件夹。
+
+
+右键name.app文件，点击显示包内容
+
+
+在终端中cd到name.app文件夹中
+
+
+用find命令定位到Assets.car文件
+1$ find . -name 'Assets.car
+
+
+
+使用 assetut...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
             <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/26</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/19/Fastlane-modify/" >
-            
-                <span>Fastlane modify</span>
-        </a>
-        <div class="abstract-content">
-            Fastlane modify起因：通过SSL kill Switch2破解掉苹果的双向验证后，抓到一个接口，结果发现该接口cookie有时效性，每隔8小时就会时失效，于是乎想着有什么简便方法可以自动延长时效，前段时间研究超级签名的时候了解到了Fastlane-Spaceship，就想着能不能从这里入手。
-通过研究fastlane源码了解到，fastlane每次调用苹果接口的时候就会执行login方法，然后获取到了cookie，最后放入目标接口中。
-Modify开始
-我们的目标文件：/fastlane-2.129.0/spaceship/lib/spaceship/portal/port...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/19</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/16/C-hook/" >
-            
-                <span>自己的C函数hook</span>
-        </a>
-        <div class="abstract-content">
-            自己的C函数hookps：此方法仅限于没有用NS_INLINE修饰的C函数
-//XXX.xm
-void (*orig_test)(void);
-
-void new_test(void){
-    NSLog(@&quot;💖💖💖💖💖。c func hook&quot;);
-    orig_test();
-}
-
-
-static void __attribute__((constructor)) initialize(void) {
-
-     MSHookFunction(MSFindSymbol(NULL,&quot;_test&quot;), (void *)&amp;ne...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/08/16/审核/" >
-            
-                <span>审核</span>
-        </a>
-        <div class="abstract-content">
-            审核前言如今苹果审核越来越严格，各个项目组都存在各种不同的审核问题：大到产品下架、封号影响业绩，小到延迟审核耽误项目进程。针对最近频繁出现的部分审核问题，做出归纳与总结，并且根据经验给与相应的解决措施，希望今后形成公司层面上的应对苹果审核的规范。
-审核条款与更新重要网址：
-
-审核指南（最新最齐全的官方审核指南）
- https://developer.apple.com/cn/app-store/review/guidelines/
- 目前更新到：2018 年 12 月 19 日
-
-审核指导（官方提供有助审核的指导意见）
- https://developer.apple.com/cn/ap...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/08/16</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/03/05/隐私政策/" >
-            
-                <span>隐私政策</span>
-        </a>
-        <div class="abstract-content">
-            隐私政策本应用尊重并保护所有使用服务用户的个人隐私权。为了给您提供更准确、更有个性化的服务，本应用会按照本隐私权政策的规定使用和披露您的个人信息。但本应用将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，在未征得您事先许可的情况下，本应用不会将这些信息对外披露或向第三方提供。本应用会不时更新本隐私权政策。 您在同意本应用服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本应用服务使用协议不可分割的一部分。
-
-适用范围(a) 在您注册本应用帐号时，您根据本应用要求提供的个人注册信息；(b) 在您使用本应用网络服务，或访问本应用平台网页时，本应用自动接收并...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/03/05</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/26/LLDB动态调试/" >
-            
-                <span>LLDB动态调试</span>
-        </a>
-        <div class="abstract-content">
-            LLDB动态调试LLDB准备工作
-复制debugserver文件（这里必须从当前连接手机中复制，不然后面会出错）
- scp -P 2222 root@localhost:/Developer/usr/bin/debugserver ./
-
-新建签名文件 env.plist
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quo...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/26</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/02/26/Frida一键dump/" >
-            
-                <span>Frida一键dump</span>
-        </a>
-        <div class="abstract-content">
-            Frida一键dump安装Frida
-iOS端安装
-  打开cydia 添加源： https://build.frida.re
-  打开刚刚添加的源 安装 frida（64位和32位，看自己手机类型）
-
-Mac端安装
-  首先最好有brew &amp; python版本为2.x （Mac默认为2.x，可以用pyenv管理python版本）
-  终端执行：sudo pip install frida
-
-假如报以下错误：Uninstalling a distutils installed project (six) has been deprecated and will be remove...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/02/26</span>
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2018/02/27</span>
             </div>
             <!-- tags  -->
             
@@ -554,8 +400,94 @@ Mac端安装
     
     <!-- paginator  -->
     
+    <nav class="page-nav">
+        <a class="extend prev" rel="prev" href="/">&#60; PREV</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+    
 </main>
             <!-- profile -->
+            
+            <div class="profile">
+    <img class="profile-avatar" alt="avatar" src= /avatar/avatar.jpg >
+    <div class="profile-name">Rico</div>
+    
+    <div class="profile-signature">
+        Change
+    </div>
+    
+    
+    <div class="profile-social">
+        
+    
+        
+            
+                <a href="mailto:358097990@qq.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/Rico358097990" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    
+        <div class="friends">
+            <div>FRIENDS</div>
+            
+                
+                    <span>
+                        <a href= //markxiu.com/ target="_black">friendA</a>
+                    </span>
+                
+            
+        </div>
+    
+    
+        <div class="about-me">
+            <a href = "/about" >ABOUT ME</a>
+        </div>
+    
+</div>
             
         </div>
         <footer class="footer footer-unloaded">
